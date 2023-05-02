@@ -1,7 +1,8 @@
 import express from 'express';
-import bodyParser from 'body-parser'
+import bodyParser from 'body-parser';
 import initWebRouter from './route/web';
-import configviewEngine from './config/viewEngine'
+import configviewEngine from './config/viewEngine';
+import connectDB from './config/connectDB'
 require('dotenv').config();
 
 let app = express();
@@ -13,6 +14,8 @@ app.use(bodyParser.json());
 configviewEngine(app);
 
 initWebRouter(app);
+
+connectDB();
 
 app.listen(port, () => {
     console.log(`this is http://localhost:${port}`)

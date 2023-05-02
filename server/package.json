@@ -1,5 +1,5 @@
 {
-  "name": "sever",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,6 +14,7 @@
     "@babel/node": "7.15.4",
     "@babel/preset-env": "7.15.6",
     "app-root-path": "3.0.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "1.19.0",
     "dotenv": "10.0.0",
     "ejs": "3.1.6",
