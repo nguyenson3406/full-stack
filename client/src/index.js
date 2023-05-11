@@ -4,21 +4,20 @@ import './styles/global.scss';
 import App from './containers/App'
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './store/reducers/rootReducer'
 
+// import rootReducer from './store/reducers/rootReducer'
+import reduxStrore, { persistor } from './redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const reduxStrore = createStore(rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
-
 root.render(
   <React.StrictMode>
     <Provider store={reduxStrore}>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

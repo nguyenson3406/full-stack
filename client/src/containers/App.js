@@ -1,15 +1,10 @@
 import logo from '../assets/images/logo.svg';
 import '../styles/App.scss';
-// import App2 from './App2';
-import TodoList from '../components/Todos/TodoList';
-import ControllSet from '../components/About/ControllSet';
+import { path } from '../utils'
+import { initWebRouter } from '../routes/web';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Nav from '../components/Nav/Nav';
-import Home from '../components/Home';
-import ListUsers from '../components/Users/ListUsers';
-import DetailUser from '../components/Users/DetailUser';
-import Login from '../views/Login/Login'
+import Auth from '../components/auth';
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,31 +15,18 @@ import {
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
+    <div className="App">
+      <header className="App-header">
+        <Router>
+          <Route path={path.LOGIN}><Auth></Auth>{initWebRouter.LOGIN}</Route>
+          {initWebRouter.NAV}
           <Switch>
-            <Route path='/login'>
-              <Login></Login>
-            </Route>
-          </Switch>
-          <Nav></Nav>
-          <Switch>
-            <Route path='/' exact>
-              <Home></Home>
-            </Route>
-            <Route path="/todo">
-              <TodoList></TodoList>
-            </Route>
-            <Route path="/about">
-              <ControllSet></ControllSet>
-            </Route>
-            <Route path="/user" exact>
-              <ListUsers></ListUsers>
-            </Route>
-            <Route path="/user/:id">
-              <DetailUser></DetailUser>
-            </Route>
+            <Route path={path.SYSTEM}>{initWebRouter.SYSTEM}</Route>
+            <Route path={path.HOME} exact>{initWebRouter.HOME}</Route>
+            <Route path={path.TODO}><Auth></Auth>{initWebRouter.TODO}</Route>
+            <Route path={path.ABOUT}>{initWebRouter.ABOUT}</Route>
+            <Route path={path.USER} exact>{initWebRouter.USER}</Route>
+            <Route path={path.DETAIL_USER}>{initWebRouter.DETAIL_USER}</Route>
           </Switch>
           <ToastContainer
             position="top-right"
@@ -57,9 +39,9 @@ function App() {
             draggable
             pauseOnHover
           />
-        </header>
-      </div>
-    </Router>
+        </Router>
+      </header>
+    </div>
   );
 }
 

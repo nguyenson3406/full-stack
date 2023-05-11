@@ -11,7 +11,7 @@ function getRandomColor() {
 
 const Color = (WrappedComponent) => {
     const colorRandom = getRandomColor();
-
+    // console.log(this.props)
     return (props) => (
         <div style={{ color: colorRandom }}>
             <WrappedComponent {...props} />

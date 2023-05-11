@@ -22,6 +22,7 @@ class Home extends React.Component {
     handleCreateUser = () => {
         this.props.addUserRedux();
     }
+
     render() {
         console.log('>>> check props redux ', this.props.dataRedux)
         let listUsers = this.props.dataRedux;
@@ -59,7 +60,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        dataRedux: state.users
+        dataRedux: state.home.users
     }
 }
 

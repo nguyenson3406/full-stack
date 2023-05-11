@@ -1,34 +1,37 @@
-const initState = {
-    users: [
-        { id: 1, name: 'Eric' },
-        { id: 2, name: 'Hoi Dan IT' },
-        { id: 3, name: 'Hoi Dan IT voi ERIC' }
-    ],
-    posts: []
-}
+import homeReducer from "./homeReducer";
+import userReducer from "./userReducer";
+import { combineReducers } from 'redux'
 
-const rootReducer = (state = initState, action) => {
 
-    switch (action.type) {
-        case 'DELETE_USER':
-            let users = state.users;
-            users = users.filter(item => item.id !== action.payload.id)
-            return {
-                ...state, users
-            };
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
 
-        case 'CREATE_USER':
-            let id = Math.floor(Math.random() * 10000)
-            let user = { id: id, name: `random - ${id}` }
+const persistCommonConfig = {
+    storage: storage,
+    stateReconciler: autoMergeLevel2,
+};
 
-            return {
-                ...state, users: [...state.users, user]
-            }
+// const rootPersistConfig = {
+//     key: 'root',
+//     storage: storage,
+//     whitelist: ['home']
+// }
 
-        default:
-            return state;
-    }
+export const userPersistConfig = {
+    ...persistCommonConfig,
+    key: 'user',
+    whitelist: ['isLoggedIn', 'userInfo']
+};
 
-}
+// const rootReducer = (state = {}, action) => ({
+//     home: homeReducer(state.home, action),
+//     user: userReducer(state.user, action),
+// })
 
-export default rootReducer;
+const rootReducer = combineReducers({
+    home: homeReducer,
+    user: persistReducer(userPersistConfig, userReducer),
+})
+// const persistedReducer = persistReducer(rootPersistConfig, rootReducer)
+export default rootReducer

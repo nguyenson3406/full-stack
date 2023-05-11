@@ -11,6 +11,7 @@ const initWebRouter = (app) => {
     router.get("/EditCRUD", homeConrollers.getEditCRUD);
     router.post("/put-CRUD", homeConrollers.putCRUD);
     router.get("/DeleteCRUD", homeConrollers.deleteCRUD);
+
     return app.use("/", router)
 }
 

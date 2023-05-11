@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { toast } from 'react-toastify';
 import './Login.scss'
+import { handLoginApi } from '../../services/userServices'
+import { connect } from 'react-redux';
 
 class Login extends Component {
 
@@ -26,14 +28,33 @@ class Login extends Component {
         })
     }
 
-    handLogin = () => {
+    handLogin = async () => {
         let { username, password } = this.state
         if (!username || !password) {
             toast.error(`Mising Username or Password`, {
                 className: 'toast-message'
             })
+        } else {
+            try {
+                let res = await handLoginApi(username, password);
+                let data = res.data;
+                console.log(data)
+                if (res && res.status !== 200) {
+                    this.props.history.push('/404');
+                }
+                if (data.errCode !== 0) {
+                    throw new Error(data.message);
+                } else {
+                    this.props.userLoginSuccess(data.user);
+                    this.props.history.push('/');
+                }
+
+            } catch (e) {
+                toast.error(e.message, {
+                    className: 'toast-message'
+                })
+            }
         }
-        console.log(this.state)
     }
 
     handShowPass = () => {
@@ -41,7 +62,6 @@ class Login extends Component {
         this.setState({
             showPass: !showPass
         })
-        console.log(this.state);
     }
 
     render() {
@@ -91,4 +111,16 @@ class Login extends Component {
     }
 }
 
-export default withRouter(Login)
+const mapStateToProps = (state) => {
+    return {
+        dataRedux: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        userLoginSuccess: (user) => dispatch({ type: 'LOGIN_SUCCESS', payload: user })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
