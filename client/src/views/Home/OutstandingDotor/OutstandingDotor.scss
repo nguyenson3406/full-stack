@@ -1,0 +1,38 @@
+.OutstandingDotor-container {
+    background-color: white;
+    border-top: 2px solid black;
+    border-color: rgb(230, 230, 230) !important;
+    box-shadow: 1px 1px 1px rgb(230, 230, 230) !important;
+
+    .OutstandingDotor-content {
+        margin: 0px 40px;
+        padding: 30px 40px 10px;
+        height: 400px;
+    }
+
+    .slide-content {
+        .select {
+            padding-top: 15px;
+            border: 1px solid rgb(230, 230, 230);
+            height: 250px !important;
+
+            img {
+                border-radius: 50% !important;
+                width: 50% !important;
+                height: 60% !important;
+                margin: auto;
+            }
+
+            p {
+                text-align: center !important;
+                margin: 0px !important;
+            }
+
+            .description {
+                font-size: 13px !important;
+                opacity: 0.5;
+            }
+
+        }
+    }
+}

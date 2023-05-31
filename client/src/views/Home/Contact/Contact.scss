@@ -1,0 +1,42 @@
+.Contact {
+    height: 450px;
+    position: relative;
+    background: url(../../../assets/images/banner-2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 35%;
+
+    .title-content {
+        height: 150px;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25), transparent);
+
+        h2 {
+            color: white;
+            position: absolute;
+            top: 15%;
+            left: 40%;
+            cursor: default;
+        }
+
+        h2:after {
+            position: absolute;
+            content: "";
+            left: 40%;
+            bottom: -10px;
+            border-bottom: 5px solid white;
+            width: 70px;
+            height: 1px;
+        }
+    }
+
+    .body-content {
+        font-weight: 600;
+        font-size: 25px;
+        cursor: default;
+
+        i {
+            margin-right: 10px;
+        }
+    }
+
+}

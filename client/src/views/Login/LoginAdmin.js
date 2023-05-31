@@ -5,7 +5,7 @@ import './Login.scss'
 import { handLoginApi } from '../../services/userServices'
 import { connect } from 'react-redux';
 
-class Login extends Component {
+class LoginAdmin extends Component {
 
     constructor(props) {
         super(props);
@@ -123,4 +123,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginAdmin))

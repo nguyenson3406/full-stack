@@ -7,9 +7,9 @@ class Auth extends Component {
         const isLoggedIn = this.props.isLoggedIn
         return (
             <>{isLoggedIn ?
-                <Redirect to="/" />
+                <Redirect to="/admin" />
                 :
-                <Redirect to="/login" />}</>
+                <Redirect to="/login-admin" />}</>
         )
     }
 }

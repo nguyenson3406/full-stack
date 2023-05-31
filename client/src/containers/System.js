@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import UserManage from '../views/System/UserManage'
 import '../views/System/System.scss'
+import { path } from '../utils'
+import { initSysRouter } from '../routes/sys'
 
 class System extends Component {
     render() {
@@ -9,7 +10,7 @@ class System extends Component {
             <div className='System-container'>
                 <div className='System-content'>
                     <Switch>
-                        <Route path='/system/user-manage'><UserManage></UserManage></Route>
+                        <Route path={path.USERMANAGE}>{initSysRouter.USERMANAGE}</Route>
                     </Switch>
                 </div>
             </div>

@@ -1,0 +1,40 @@
+.Blog-container {
+    border-top: 2px solid black;
+    border-color: rgb(230, 230, 230) !important;
+    box-shadow: 1px 1px 1px rgb(230, 230, 230) !important;
+
+    .Blog-content {
+        margin: 0px 40px;
+        padding: 30px 40px 10px;
+        height: 350px;
+
+        .slide-content {
+            .select {
+                display: flex !important;
+
+                img {
+                    width: 50% !important;
+                }
+
+                .text-content {
+                    padding-left: 10px;
+
+                    p {
+                        margin: 0;
+                    }
+
+                    .title {
+                        font-weight: bold;
+                        font-size: 18px !important;
+                    }
+
+                    .description {
+                        font-size: 15px !important;
+                        opacity: 0.5;
+                    }
+
+                }
+            }
+        }
+    }
+}

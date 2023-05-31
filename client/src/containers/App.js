@@ -1,44 +1,37 @@
-import logo from '../assets/images/logo.svg';
 import '../styles/App.scss';
 import { path } from '../utils'
 import { initWebRouter } from '../routes/web';
 import { ToastContainer, toast } from 'react-toastify';
+import Webside from './Webside';
 import 'react-toastify/dist/ReactToastify.css';
-import Auth from '../components/auth';
+import Auth from '../components/Auth/auth';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  NavLink
 } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Router>
-          <Route path={path.LOGIN}><Auth></Auth>{initWebRouter.LOGIN}</Route>
-          {initWebRouter.NAV}
           <Switch>
-            <Route path={path.SYSTEM}>{initWebRouter.SYSTEM}</Route>
-            <Route path={path.HOME} exact>{initWebRouter.HOME}</Route>
-            <Route path={path.TODO}><Auth></Auth>{initWebRouter.TODO}</Route>
-            <Route path={path.ABOUT}>{initWebRouter.ABOUT}</Route>
-            <Route path={path.USER} exact>{initWebRouter.USER}</Route>
-            <Route path={path.DETAIL_USER}>{initWebRouter.DETAIL_USER}</Route>
+            <Route path={path.LOGIN}><Auth></Auth>{initWebRouter.LOGIN}</Route>
+            <Route path={path.SYSTEM}><Auth></Auth>{initWebRouter.SYSTEM}</Route>
+            <Route path='/'><Webside></Webside></Route>
           </Switch>
-          <ToastContainer
-            position="top-right"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
         </Router>
       </header>
     </div>

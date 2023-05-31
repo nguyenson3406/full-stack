@@ -1,0 +1,64 @@
+.Home-header {
+    height: 500px;
+    position: relative;
+    background: url(../../../assets/images/banner-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 35%;
+
+    .title-content {
+        height: 300px;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25), transparent);
+
+        h1 {
+            color: white;
+            position: absolute;
+            top: 30%;
+            left: 30%;
+            cursor: default;
+        }
+    }
+
+    .select-content {
+        height: 200px;
+        position: absolute;
+        bottom: 0 !important;
+        display: flex;
+        justify-content: center;
+        background-image: linear-gradient(transparent, white);
+
+        .select {
+            padding: 10px 10px !important;
+
+            .img-content {
+                margin: auto;
+                background-color: white;
+                border-radius: 50%;
+                width: 60px;
+                padding: 10px;
+                border: 1px solid;
+                border-color: rgb(230, 230, 230);
+                box-shadow: 1px 1px 1px rgb(230, 230, 230);
+                text-align: center;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: scale-down;
+                }
+            }
+
+            span {
+                font-size: 15px;
+                color: black;
+                font-weight: 500;
+            }
+        }
+
+        .select:hover {
+            span {
+                color: #45c3d2;
+            }
+        }
+    }
+}
