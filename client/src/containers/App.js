@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Webside from './Webside';
 import 'react-toastify/dist/ReactToastify.css';
 import Auth from '../components/Auth/auth';
+import ScrollToTop from '../components/HOC/ScrollToTop';
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,11 +28,13 @@ function App() {
           pauseOnHover
         />
         <Router>
-          <Switch>
-            <Route path={path.LOGIN}><Auth></Auth>{initWebRouter.LOGIN}</Route>
-            <Route path={path.SYSTEM}><Auth></Auth>{initWebRouter.SYSTEM}</Route>
-            <Route path='/'><Webside></Webside></Route>
-          </Switch>
+          <ScrollToTop>
+            <Switch>
+              <Route path={path.LOGIN}><Auth></Auth>{initWebRouter.LOGIN}</Route>
+              <Route path={path.SYSTEM}><Auth></Auth>{initWebRouter.SYSTEM}</Route>
+              <Route path='/'><Webside></Webside></Route>
+            </Switch>
+          </ScrollToTop>
         </Router>
       </header>
     </div>

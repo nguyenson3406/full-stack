@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './Nav.scss'
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from '../../assets/images/logo/logo.svg'
 
 class Nav extends Component {
@@ -13,7 +13,7 @@ class Nav extends Component {
     }
 
     shrinkNav = () => {
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        if (document.body.scrollTop >= 80 || document.documentElement.scrollTop >= 80) {
             this.setState({
                 show: false
             })
@@ -30,31 +30,31 @@ class Nav extends Component {
             <div className={show ? "nav-container shrink-nav" : "nav-container"}>
                 <div className="nav-content row col-12">
                     <div className="left-content col-2">
-                        <NavLink className="logo-content" to='/'>
+                        <Link className="logo-content" to='/'>
                             <span><img src={logo} />TestBooking</span>
-                        </NavLink>
+                        </Link>
                     </div>
                     <div className="center-content col-5">
-                        <NavLink className="services-content" to='/todo'>
+                        <Link className="services-content" to='/todo'>
                             <span className="title">
-                                Dich vu kham
+                                Dich vu kham<i className="fas fa-spinner-third"></i>
                             </span>
-                        </NavLink>
-                        <NavLink className="department-content" to='/user'>
+                        </Link>
+                        <Link className="clinic-content" to='/user'>
                             <span className="title">
                                 Co so y te
                             </span>
-                        </NavLink>
-                        <NavLink className="doctor-content" to='/todo'>
+                        </Link>
+                        <Link className="doctor-content" to='/todo'>
                             <span className="title">
                                 Bac si
                             </span>
-                        </NavLink>
-                        <NavLink className="blog-content" to='/about'>
+                        </Link>
+                        <Link className="blog-content" to='/about'>
                             <span className="title">
                                 Cam nang
                             </span>
-                        </NavLink>
+                        </Link>
                     </div>
                     <div className="right-content col-4">
                         <div className="search-content col-6">

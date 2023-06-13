@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
+import { path } from '../../utils'
 
 class Auth extends Component {
     render() {
         const isLoggedIn = this.props.isLoggedIn
         return (
             <>{isLoggedIn ?
-                <Redirect to="/admin" />
+                <Redirect to={path.SYSTEM} />
                 :
-                <Redirect to="/login-admin" />}</>
+                <Redirect to={path.LOGIN} />}</>
         )
     }
 }

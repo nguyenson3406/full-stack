@@ -8,6 +8,9 @@
   top: 0;
   background-color: white;
   transition: 0.4s;
+  border-top: 1px solid black;
+  border-color: rgb(230, 230, 230) !important;
+  box-shadow: 1px 1px 1px rgb(230 230 230) !important;
 
   .nav-content {
     padding: 0px 90px;
@@ -166,7 +169,7 @@
       }
 
       .help-content:hover {
-        opacity: 0.5;
+        opacity: 0.6;
       }
     }
   }

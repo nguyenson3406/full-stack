@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './HomeHeader.scss'
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import img from "../../../routes/img"
 
 class HomeHeadder extends Component {
@@ -13,40 +13,40 @@ class HomeHeadder extends Component {
                 <div className="select-content  col-12">
                     <div className="row col-9">
                         <div className="col-2">
-                            <NavLink className="select" to='/todo'>
+                            <Link className="select" to='/todo'>
                                 <div className="img-content"><img src={img.Specialty} /></div>
                                 <span>Kham Chuyen Khoa</span>
-                            </NavLink>
+                            </Link>
                         </div>
                         <div className="col-2">
-                            <NavLink className="select" to='/todo'>
+                            <Link className="select" to='/todo'>
                                 <div className="img-content"><img src={img.tuXa} /></div>
                                 <span>Kham Tu Xa</span>
-                            </NavLink>
+                            </Link>
                         </div>
                         <div className="col-2">
-                            <NavLink className="select" to='/todo'>
+                            <Link className="select" to='/todo'>
                                 <div className="img-content"><img src={img.tongQuat} /></div>
                                 <span>Kham Tong Quat</span>
-                            </NavLink>
+                            </Link>
                         </div>
                         <div className="col-2">
-                            <NavLink className="select" to='/todo'>
+                            <Link className="select" to='/todo'>
                                 <div className="img-content"><img src={img.xetNghiem} /></div>
                                 <span>Xet Nghiem Y Hoc</span>
-                            </NavLink>
+                            </Link>
                         </div>
                         <div className="col-2">
-                            <NavLink className="select" to='/todo'>
+                            <Link className="select" to='/todo'>
                                 <div className="img-content"><img src={img.tinhThan} /></div>
                                 <span>Suc Khoe Tinh Than</span>
-                            </NavLink>
+                            </Link>
                         </div>
                         <div className="col-2">
-                            <NavLink className="select" to='/todo'>
+                            <Link className="select" to='/todo'>
                                 <div className="img-content"><img src={img.nhaKhoa} /></div>
                                 <span>Kham Nha Khoa</span>
-                            </NavLink>
+                            </Link>
                         </div>
                     </div>
                 </div>

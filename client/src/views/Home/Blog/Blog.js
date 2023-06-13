@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './Blog.scss'
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import img from "../../../routes/img"
 import Slider from "react-slick";
 import test from "../../../assets/images/cold.png"
@@ -21,15 +21,15 @@ class Blog extends Component {
                     <div className="title-content row col-12">
                         <span className="col-5">Cẩm nang</span>
                         <div className="more-container col-2">
-                            <NavLink className="more" to='/todo'>
+                            <Link className="more" to='/todo'>
                                 Tat ca bai viet
-                            </NavLink>
+                            </Link>
                         </div>
                     </div>
                     <div className="slide-content">
                         <Slider className="col-12" {...settings}>
                             <div>
-                                <NavLink className="select" to='/todo'>
+                                <Link className="select" to='/todo'>
                                     <img src={test} />
                                     <div className="text-content">
                                         <p className="title">Test booking 1</p>
@@ -37,10 +37,10 @@ class Blog extends Component {
                                             Description test booking 1
                                         </p>
                                     </div>
-                                </NavLink>
+                                </Link>
                             </div>
                             <div>
-                                <NavLink className="select" to='/todo'>
+                                <Link className="select" to='/todo'>
                                     <img src={test} />
                                     <div className="text-content">
                                         <p className="title">Test booking 2</p>
@@ -48,10 +48,10 @@ class Blog extends Component {
                                             Description test booking 2
                                         </p>
                                     </div>
-                                </NavLink>
+                                </Link>
                             </div>
                             <div>
-                                <NavLink className="select" to='/todo'>
+                                <Link className="select" to='/todo'>
                                     <img src={test} />
                                     <div className="text-content">
                                         <p className="title">Test booking 3</p>
@@ -59,10 +59,10 @@ class Blog extends Component {
                                             Description test booking 3
                                         </p>
                                     </div>
-                                </NavLink>
+                                </Link>
                             </div>
                             <div>
-                                <NavLink className="select" to='/todo'>
+                                <Link className="select" to='/todo'>
                                     <img src={test} />
                                     <div className="text-content">
                                         <p className="title">Test booking 4</p>
@@ -70,10 +70,10 @@ class Blog extends Component {
                                             Description test booking 4
                                         </p>
                                     </div>
-                                </NavLink>
+                                </Link>
                             </div>
                             <div>
-                                <NavLink className="select" to='/todo'>
+                                <Link className="select" to='/todo'>
                                     <img src={test} />
                                     <div className="text-content">
                                         <p className="title">Test booking 5</p>
@@ -81,10 +81,10 @@ class Blog extends Component {
                                             Description test booking 5
                                         </p>
                                     </div>
-                                </NavLink>
+                                </Link>
                             </div>
                             <div>
-                                <NavLink className="select" to='/todo'>
+                                <Link className="select" to='/todo'>
                                     <img src={test} />
                                     <div className="text-content">
                                         <p className="title">Test booking 6</p>
@@ -92,7 +92,7 @@ class Blog extends Component {
                                             Description test booking 6
                                         </p>
                                     </div>
-                                </NavLink>
+                                </Link>
                             </div>
                         </Slider>
                     </div>

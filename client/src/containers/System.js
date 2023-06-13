@@ -8,11 +8,9 @@ class System extends Component {
     render() {
         return (
             <div className='System-container'>
-                <div className='System-content'>
-                    <Switch>
-                        <Route path={path.USERMANAGE}>{initSysRouter.USERMANAGE}</Route>
-                    </Switch>
-                </div>
+                <Switch>
+                    <Route path={path.USERMANAGE}>{initSysRouter.USERMANAGE}</Route>
+                </Switch>
             </div>
         )
     }

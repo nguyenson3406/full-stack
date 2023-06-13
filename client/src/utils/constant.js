@@ -1,11 +1,11 @@
 export const path = {
     HOME: '/',
-    LOG_OUT: '/logout',
+    LOG_OUT: '/admin/logout',
     TODO: '/todo',
     ABOUT: '/about',
     USER: '/user',
     DETAIL_USER: '/user/:id',
     SYSTEM: '/admin',
-    LOGIN: '/login-admin',
-    USERMANAGE: '/admin/user-manage'
+    LOGIN: '/admin/login',
+    USERMANAGE: '/admin/user-manage',
 };

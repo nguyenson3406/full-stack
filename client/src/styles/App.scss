@@ -23,6 +23,14 @@
     // justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
+
+    .Webside-container {
+      min-height: 100vh;
+    }
+
+    .System-container {
+      min-height: 100vh;
+    }
   }
 
   .App-link {
