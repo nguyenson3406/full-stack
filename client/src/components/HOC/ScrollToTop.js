@@ -14,7 +14,6 @@ class ScrollToTop extends React.Component {
     }
 
     render() {
-        console.log(this.props.history)
         return this.props.children;
     }
 }

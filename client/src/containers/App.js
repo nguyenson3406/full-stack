@@ -30,8 +30,8 @@ function App() {
         <Router>
           <ScrollToTop>
             <Switch>
-              <Route path={path.LOGIN}><Auth></Auth>{initWebRouter.LOGIN}</Route>
-              <Route path={path.SYSTEM}><Auth></Auth>{initWebRouter.SYSTEM}</Route>
+              <Route path={path.LOGIN}><Auth isLogin='true'></Auth>{initWebRouter.LOGIN}</Route>
+              <Route path={path.SYSTEM}><Auth isLogin='false'></Auth>{initWebRouter.SYSTEM}</Route>
               <Route path='/'><Webside></Webside></Route>
             </Switch>
           </ScrollToTop>

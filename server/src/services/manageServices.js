@@ -191,4 +191,5 @@ module.exports = {
     createNewUser: createNewUser,
     updateUser: updateUser,
     deleteUser: deleteUser,
+    checkUserEmail: checkUserEmail,
 }

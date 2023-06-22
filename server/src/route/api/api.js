@@ -1,5 +1,6 @@
 import express from "express";
-import userControlers from "../controllers/userControllers"
+import initManageRouter from './manage'
+import initAuthRouter from "./auth";
 
 let router = express.Router();
 
@@ -11,13 +12,8 @@ const initApiRouter = (app) => {
     // router.get("/EditCRUD", homeConrollers.getEditCRUD);
     // router.post("/put-CRUD", homeConrollers.putCRUD);
     // router.get("/DeleteCRUD", homeConrollers.deleteCRUD);
-    router.post("/login", userControlers.handLogin);
-    router.get("/getAllUser", userControlers.getAllUser);
-    router.post("/createNewUser", userControlers.createNewUser);
-    router.put("/updateUser", userControlers.updateUser)
-    router.delete("/deleteUser", userControlers.deleteUser)
-
-    return app.use("/api", router)
+    initAuthRouter(app);
+    initManageRouter(app);
 }
 
 export default initApiRouter

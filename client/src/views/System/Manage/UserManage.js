@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { handGetUserApi, handNewUserApi, handUpdateUserApi, handDeleteUserApi } from "../../services/manageServices"
+import './UserManage.scss'
+import { handGetUserApi, handNewUserApi, handUpdateUserApi, handDeleteUserApi } from "../../../services/manageServices"
 import ModalUser from "./ModalUser";
 import ModalEdit from "./ModalEdit";
-import { emitter } from "../../utils/emitter"
+import { emitter } from "../../../utils/emitter"
 import { toast } from 'react-toastify';
 
 class UserManage extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button } from 'react-bootstrap';
-import { emitter } from "../../utils/emitter"
+import { emitter } from "../../../utils/emitter"
 import { toast } from 'react-toastify';
 
 class ModalEdit extends Component {

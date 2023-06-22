@@ -3,11 +3,13 @@ import { Switch, Route } from 'react-router-dom'
 import '../views/System/System.scss'
 import { path } from '../utils'
 import { initSysRouter } from '../routes/sys'
+import NavSystem from '../views/Nav/NavSystem'
 
 class System extends Component {
     render() {
         return (
             <div className='System-container'>
+                <NavSystem></NavSystem>
                 <Switch>
                     <Route path={path.USERMANAGE}>{initSysRouter.USERMANAGE}</Route>
                 </Switch>

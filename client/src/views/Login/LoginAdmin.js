@@ -16,6 +16,13 @@ class LoginAdmin extends Component {
         }
     }
 
+    componentDidMount = () => {
+        let isLoggedIn = this.props.dataRedux.isLoggedIn
+        if (isLoggedIn) {
+            this.props.history.push('/admin');
+        }
+    }
+
     handOnChangeUser = (event) => {
         this.setState({
             username: event.target.value
@@ -28,6 +35,12 @@ class LoginAdmin extends Component {
         })
     }
 
+    handOnKeyDown = (event) => {
+        if (event.key === "Enter") {
+            this.handLogin()
+        }
+    }
+
     handLogin = async () => {
         let { username, password } = this.state
         if (!username || !password) {
@@ -38,15 +51,14 @@ class LoginAdmin extends Component {
             try {
                 let res = await handLoginApi(username, password);
                 let data = res.data;
-                console.log(data)
                 if (res && res.status !== 200) {
                     this.props.history.push('/404');
                 }
                 if (data.errCode !== 0) {
                     throw new Error(data.message);
                 } else {
-                    this.props.userLoginSuccess(data.user);
-                    this.props.history.push('/');
+                    this.props.userLoginSuccess(data.user, data.accessToken);
+                    this.props.history.push('/admin');
                 }
 
             } catch (e) {
@@ -75,6 +87,7 @@ class LoginAdmin extends Component {
                             <label className="mb-2">Username:</label>
                             <input type="text" className="form-control" placeholder="Enter your username"
                                 value={username}
+                                onKeyDown={(event) => this.handOnKeyDown(event)}
                                 onChange={(event) => this.handOnChangeUser(event)}
                             />
                         </div>
@@ -83,6 +96,7 @@ class LoginAdmin extends Component {
                             <input type={showPass === false ? "password" : "text"}
                                 className="form-control" placeholder="Enter your password"
                                 value={password}
+                                onKeyDown={(event) => this.handOnKeyDown(event)}
                                 onChange={(event) => this.handOnChangePass(event)}
                             />
                             <div className="showPass" onClick={() => this.handShowPass()}>
@@ -113,13 +127,13 @@ class LoginAdmin extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        dataRedux: state.user
+        dataRedux: state.user,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        userLoginSuccess: (user) => dispatch({ type: 'LOGIN_SUCCESS', payload: user })
+        userLoginSuccess: (user, accessToken) => dispatch({ type: 'LOGIN_SUCCESS', payload: { user, accessToken } })
     }
 }
 

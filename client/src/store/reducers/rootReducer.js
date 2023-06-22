@@ -21,7 +21,7 @@ const persistCommonConfig = {
 export const userPersistConfig = {
     ...persistCommonConfig,
     key: 'user',
-    whitelist: ['isLoggedIn', 'userInfo']
+    whitelist: ['isLoggedIn', 'userInfo', 'accessToken']
 };
 
 // const rootReducer = (state = {}, action) => ({
