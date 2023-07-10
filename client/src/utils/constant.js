@@ -7,5 +7,6 @@ export const path = {
     DETAIL_USER: '/user/:id',
     SYSTEM: '/admin',
     LOGIN: '/admin/login',
-    USERMANAGE: '/admin/user-manage',
+    USERMANAGE: '/admin/user',
+    CATALOG_DOCTOR: '/admin/catalog',
 };

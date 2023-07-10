@@ -3,6 +3,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 import { initWebRouter } from '../routes/web'
 import { path } from '../utils';
 import ScrollToTop from '../components/HOC/ScrollToTop';
+import Home from '../components/Home';
 
 class Webside extends Component {
     render() {
@@ -17,6 +18,7 @@ class Webside extends Component {
                             <Route path={path.ABOUT} exact>{initWebRouter.ABOUT}</Route>
                             <Route path={path.USER} exact>{initWebRouter.USER}</Route>
                             <Route path={path.DETAIL_USER} exact>{initWebRouter.DETAIL_USER}</Route>
+                            <Route path='/test'><Home></Home></Route>
                             <Route path='*'>{initWebRouter.ERROR404}</Route>
                         </Switch>
                     </ScrollToTop>

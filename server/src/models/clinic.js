@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         name: DataTypes.STRING,
         address: DataTypes.STRING,
         description: DataTypes.TEXT,
-        image: DataTypes.STRING
+        image: DataTypes.BLOB('long'),
+        show: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'Clinic',

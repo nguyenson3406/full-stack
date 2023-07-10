@@ -11,7 +11,7 @@ const userReducer = (state = initState, action) => {
             return {
                 ...state,
                 isLoggedIn: true,
-                userInfo: action.payload.user,
+                userInfo: action.payload.userInfo,
                 accessToken: action.payload.accessToken
             };
 

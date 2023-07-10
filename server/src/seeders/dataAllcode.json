@@ -1,0 +1,302 @@
+[
+    {
+        "type": "ROLE",
+        "key": "R1",
+        "value_en": "Admin",
+        "value_vi": "Quản trị viên"
+    },
+    {
+        "type": "ROLE",
+        "key": "R2",
+        "value_en": "SubAdmin",
+        "value_vi": "Quản trị viên phụ"
+    },
+    {
+        "type": "ROLE",
+        "key": "R3",
+        "value_en": "Doctor",
+        "value_vi": "Bác sĩ"
+    },
+    {
+        "type": "ROLE",
+        "key": "R4",
+        "value_en": "Patient",
+        "value_vi": "Bệnh nhân"
+    },
+    {
+        "type": "STATUS",
+        "key": "S1",
+        "value_en": "New",
+        "value_vi": "Lịch hẹn mới"
+    },
+    {
+        "type": "STATUS",
+        "key": "S2",
+        "value_en": "Confirmed",
+        "value_vi": "Đã xác nhận"
+    },
+    {
+        "type": "STATUS",
+        "key": "S3",
+        "value_en": "Done",
+        "value_vi": "Đã khám xong"
+    },
+    {
+        "type": "STATUS",
+        "key": "S4",
+        "value_en": "Cancel",
+        "value_vi": "Đã hủy"
+    },
+    {
+        "type": "TIME",
+        "key": "T1",
+        "value_en": "8:00 AM - 9:00 AM",
+        "value_vi": "8:00 - 9:00"
+    },
+    {
+        "type": "TIME",
+        "key": "T2",
+        "value_en": "9:00 AM - 10:00 AM",
+        "value_vi": "9:00 - 10:00"
+    },
+    {
+        "type": "TIME",
+        "key": "T3",
+        "value_en": "10:00 AM - 11:00 AM",
+        "value_vi": "10:00 - 11:00"
+    },
+    {
+        "type": "TIME",
+        "key": "T4",
+        "value_en": "11:00 AM - 12:00 AM",
+        "value_vi": "11:00 - 12:00"
+    },
+    {
+        "type": "TIME",
+        "key": "T5",
+        "value_en": "1:00 PM - 2:00 PM",
+        "value_vi": "13:00 - 14:00"
+    },
+    {
+        "type": "TIME",
+        "key": "T6",
+        "value_en": "2:00 PM - 3:00 PM",
+        "value_vi": "14:00 - 15:00"
+    },
+    {
+        "type": "TIME",
+        "key": "T7",
+        "value_en": "3:00 PM - 4:00 PM",
+        "value_vi": "15:00 - 16:00"
+    },
+    {
+        "type": "TIME",
+        "key": "T8",
+        "value_en": "4:00 PM - 5:00 PM",
+        "value_vi": "16:00 - 17:00"
+    },
+    {
+        "type": "POSITION",
+        "key": "P0",
+        "value_en": "None",
+        "value_vi": "Bác sĩ"
+    },
+    {
+        "type": "POSITION",
+        "key": "P1",
+        "value_en": "Master",
+        "value_vi": "Thạc sĩ"
+    },
+    {
+        "type": "POSITION",
+        "key": "P2",
+        "value_en": "Doctor",
+        "value_vi": "Tiến sĩ"
+    },
+    {
+        "type": "POSITION",
+        "key": "P3",
+        "value_en": "Associate Professor",
+        "value_vi": "Phó giáo sư"
+    },
+    {
+        "type": "POSITION",
+        "key": "P4",
+        "value_en": "Professor",
+        "value_vi": "Giáo sư"
+    },
+    {
+        "type": "GENDER",
+        "key": "M",
+        "value_en": "Male",
+        "value_vi": "Nam"
+    },
+    {
+        "type": "GENDER",
+        "key": "F",
+        "value_en": "Female",
+        "value_vi": "Nữ"
+    },
+    {
+        "type": "GENDER",
+        "key": "O",
+        "value_en": "Other",
+        "value_vi": "Khác"
+    },
+    {
+        "type": "PRICE",
+        "key": "PRI1",
+        "value_en": "10",
+        "value_vi": "200000"
+    },
+    {
+        "type": "PRICE",
+        "key": "PRI2",
+        "value_en": "15",
+        "value_vi": "250000"
+    },
+    {
+        "type": "PRICE",
+        "key": "PRI3",
+        "value_en": "20",
+        "value_vi": "300000"
+    },
+    {
+        "type": "PRICE",
+        "key": "PRI4",
+        "value_en": "25",
+        "value_vi": "350000"
+    },
+    {
+        "type": "PRICE",
+        "key": "PRI5",
+        "value_en": "30",
+        "value_vi": "400000"
+    },
+    {
+        "type": "PRICE",
+        "key": "PRI6",
+        "value_en": "35",
+        "value_vi": "450000"
+    },
+    {
+        "type": "PRICE",
+        "key": "PRI7",
+        "value_en": "40",
+        "value_vi": "500000"
+    },
+    {
+        "type": "PAYMENT",
+        "key": "PAY1",
+        "value_en": "Cash",
+        "value_vi": "Tiền mặt"
+    },
+    {
+        "type": "PAYMENT",
+        "key": "PAY2",
+        "value_en": "Credit card",
+        "value_vi": "Thẻ ATM"
+    },
+    {
+        "type": "PAYMENT",
+        "key": "PAY3",
+        "value_en": "All payment method",
+        "value_vi": "Tất cả"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO1",
+        "value_en": "Ha Noi",
+        "value_vi": "Hà Nội"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO2",
+        "value_en": "Ho Chi Minh",
+        "value_vi": "Hồ Chí Minh"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO3",
+        "value_en": "Da Nang",
+        "value_vi": "Đà Nẵng"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO4",
+        "value_en": "Can Tho",
+        "value_vi": "Cần Thơ"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO5",
+        "value_en": "Binh Duong",
+        "value_vi": "Bình Dương"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO6",
+        "value_en": "Dong Nai",
+        "value_vi": "Đồng Nai"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO7",
+        "value_en": "Quang Ninh",
+        "value_vi": "Quảng Ninh"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO8",
+        "value_en": "Hue",
+        "value_vi": "Thừa Thiên Huế"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO9",
+        "value_en": "Quang Binh",
+        "value_vi": "Quảng Bình"
+    },
+    {
+        "type": "PROVINCE",
+        "key": "PRO10",
+        "value_en": "Khanh Hoa",
+        "value_vi": "Khánh Hòa"
+    },
+    {
+        "type": "SERVICES",
+        "key": "ST1",
+        "value_en": "Specialist examination",
+        "value_vi": " Khám chuyên khoa"
+    },
+    {
+        "type": "SERVICES",
+        "key": "ST2",
+        "value_en": "Remote consultation",
+        "value_vi": " Khám tư vấn từ xa"
+    },
+    {
+        "type": "SERVICES",
+        "key": "ST3",
+        "value_en": "General examination",
+        "value_vi": " Khám tổng quát "
+    },
+    {
+        "type": "SERVICES",
+        "key": "ST4",
+        "value_en": "Medical test",
+        "value_vi": " Xét nghiệm y học "
+    },
+    {
+        "type": "SERVICES",
+        "key": "ST5",
+        "value_en": "Mental health",
+        "value_vi": " Sức khỏe tinh thần "
+    },
+    {
+        "type": "SERVICES",
+        "key": "ST6",
+        "value_en": "Dental examination",
+        "value_vi": " Khám nha khoa"
+    }
+]

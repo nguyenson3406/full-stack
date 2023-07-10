@@ -18,11 +18,8 @@ const homeReducer = (state = initState, action) => {
             };
 
         case 'CREATE_USER':
-            let id = Math.floor(Math.random() * 10000)
-            let user = { id: id, name: `random - ${id}` }
-
             return {
-                ...state, users: [...state.users, user]
+                ...state, users: [...state.users, action.payload]
             }
 
         default:

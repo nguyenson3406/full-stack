@@ -4,4 +4,30 @@
     min-width: 100%;
     min-height: 100%;
     background-color: white;
+
+    .System-content {
+        min-height: 90vh;
+
+        .side-nav-container {
+            background-color: white !important;
+            transition: 0.4s;
+            border-right: 1px solid;
+            border-top: 1px solid;
+            border-color: rgb(230, 230, 230) !important;
+            margin: 0;
+            padding: 0px;
+            height: 90vh;
+            position: fixed;
+            overflow: auto;
+        }
+
+        .content {
+            float: right;
+
+            .tab-content {
+                height: 10px;
+                color: black;
+            }
+        }
+    }
 }

@@ -1,12 +1,12 @@
-.UserManage-background {
-    position: absolute;
-    margin-top: 0px;
+.CatalogDoctor-background {
+    position: relative;
+    margin-top: 5px;
     width: 100%;
     min-height: 80%;
     background: white;
     font-family: 'Poppins', sans-serif;
 
-    .UserManage-container {
+    .CatalogDoctor-container {
         position: absolute;
         height: 90%;
         background-color: white;
@@ -18,7 +18,8 @@
         border-radius: 10px;
         font-size: 16px;
 
-        .UserManage-content {
+        .CatalogDoctor-content {
+            margin-top: 10px;
             position: absolute;
             left: 50%;
             transform: translate(-50%);
@@ -67,22 +68,6 @@
                     color: red;
                 }
             }
-        }
-    }
-}
-
-.modal-content {
-    .modal-header {
-        background-color: #0d6efd;
-        color: white !important;
-        height: 40px;
-        padding: 10px;
-        font-size: 20px;
-
-        .close-modal {
-            background: transparent;
-            color: white;
-            border: none;
         }
     }
 }

@@ -12,20 +12,24 @@
 
     .slide-content {
         .select {
-            padding-top: 15px;
+            padding-top: 20px;
             border: 1px solid rgb(230, 230, 230);
-            height: 250px !important;
+            height: 270px !important;
 
             img {
                 border-radius: 50% !important;
                 width: 50% !important;
-                height: 60% !important;
+                height: 50% !important;
                 margin: auto;
             }
 
             p {
                 text-align: center !important;
                 margin: 0px !important;
+            }
+
+            .title {
+                margin-top: 15px !important;
             }
 
             .description {

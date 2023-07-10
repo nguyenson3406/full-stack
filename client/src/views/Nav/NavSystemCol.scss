@@ -1,0 +1,126 @@
+.side-nav-content {
+    font-size: 17px;
+    color: black;
+    text-align: left;
+
+    .selected {
+        color: #45c3d2;
+    }
+
+    .title {
+        cursor: pointer;
+
+        span {
+            i {
+                font-size: 15px;
+            }
+        }
+    }
+
+    .title:hover {
+        color: #45c3d2;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:hover {
+        color: #45c3d2;
+    }
+
+    .home-content {
+        padding: 3px 0px;
+
+        a {
+            display: block;
+            width: 100%;
+            padding: 3px 0px;
+            padding-left: 8px;
+
+            i {
+                margin-left: 5px;
+                margin-right: 9px;
+            }
+        }
+    }
+
+    .catalog-management-content {
+        padding: 3px 0px;
+
+        .title {
+            display: block;
+            width: 100%;
+            padding: 3px 0px;
+            padding-left: 8px;
+
+            i {
+                margin-left: 8px;
+                margin-right: 12px;
+            }
+        }
+
+        #catalog-text {
+            .title {
+                padding-left: 20px;
+
+                i {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    .infor-management-content {
+        padding: 3px 0px;
+
+        .title {
+            display: block;
+            width: 100%;
+            padding: 3px 0px;
+            padding-left: 8px;
+
+            i {
+                margin-left: 6px;
+                margin-right: 12px;
+            }
+        }
+
+        #infor-text {
+            .title {
+                padding-left: 20px;
+            }
+
+            i {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .user-management-content {
+        padding: 3px 0px;
+
+        .title {
+            display: block;
+            width: 100%;
+            padding: 3px 0px;
+            padding-left: 8px;
+
+            i {
+                margin-left: 3px;
+                margin-right: 9px;
+            }
+        }
+
+        #user-text {
+            .title {
+                padding-left: 20px;
+            }
+
+            i {
+                font-size: 14px;
+            }
+        }
+    }
+}

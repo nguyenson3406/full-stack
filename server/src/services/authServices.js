@@ -34,10 +34,13 @@ const refreshToken = async (refreshToken) => {
         if (isExist) {
             let accessToken = createAccessToken(decoded.username);
             let user = await db.User.findOne({
-                attributes: ['email', 'roleId'],
+                attributes: ['id', 'email', 'firstName', 'roleId', 'image'],
                 where: { email: decoded.username },
                 raw: true
             })
+            if (user.image) {
+                user.image = new Buffer.from(user.image, 'base64').toString('binary')
+            }
             data.errCode = 0
             data.message = `ok!`
             data.accessToken = accessToken
@@ -62,13 +65,16 @@ let handUserLogin = (email, password) => {
             let isExist = await checkUserEmail(email);
             if (isExist) {
                 let user = await db.User.findOne({
-                    attributes: ['email', 'password', 'roleId'],
+                    attributes: ['id', 'email', 'password', 'firstName', 'roleId', 'image'],
                     where: { email: email },
                     raw: true
                 })
                 if (userData) {
                     let check = await bcrypt.compareSync(password, user.password);
                     if (check) {
+                        if (user.image) {
+                            user.image = new Buffer.from(user.image, 'base64').toString('binary')
+                        }
                         userData.errCode = 0
                         userData.message = `ok!`
                         delete user.password
@@ -118,10 +124,13 @@ const authLogin = (email) => {
             let isExist = checkUserEmail(email);
             if (isExist) {
                 let user = await db.User.findOne({
-                    attributes: ['email', 'roleId'],
+                    attributes: ['id', 'email', 'firstName', 'roleId', 'image'],
                     where: { email: email },
                     raw: true
                 })
+                if (user.image) {
+                    user.image = new Buffer.from(user.image, 'base64').toString('binary')
+                }
                 data.errCode = 0;
                 data.message = 'ok!';
                 data.user = user;

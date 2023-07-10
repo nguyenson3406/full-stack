@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { toast } from 'react-toastify';
+import * as actions from '../../store/actions/index';
 import './Login.scss'
 import { handLoginApi } from '../../services/userServices'
 import { connect } from 'react-redux';
@@ -133,7 +134,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        userLoginSuccess: (user, accessToken) => dispatch({ type: 'LOGIN_SUCCESS', payload: { user, accessToken } })
+        userLoginSuccess: (user, accessToken) => dispatch(actions.Login(user, accessToken))
     }
 }
 

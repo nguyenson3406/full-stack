@@ -3,43 +3,6 @@ import bcrypt from 'bcryptjs';
 
 const salt = bcrypt.genSaltSync(10);
 
-let handUserLogin = (email, password) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let userData = {};
-            let isExist = await checkUserEmail(email);
-            if (isExist) {
-                let user = await db.User.findOne({
-                    attributes: ['email', 'password', 'roleId'],
-                    where: { email: email },
-                    raw: true
-                })
-                if (userData) {
-                    let check = await bcrypt.compareSync(password, user.password);
-                    if (check) {
-                        userData.errCode = 0
-                        userData.message = `ok!`
-                        delete user.password
-                        userData.user = user
-                    } else {
-                        userData.errCode = 3
-                        userData.message = `Your's passwork is wrong`
-                    }
-                } else {
-                    userData.message = `Your's email isn't exist`
-                    userData.errCode = 2
-                }
-            } else {
-                userData.message = `Your's email isn't exist`
-                userData.errCode = 2
-            }
-            resolve(userData)
-        } catch (e) {
-            reject(e)
-        }
-    })
-}
-
 let checkUserEmail = (email) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -67,9 +30,12 @@ let getAllUser = (userId) => {
                 });
             } else {
                 users = await db.User.findOne({
-                    where: { id: userId },
-                    attributes: ['id', 'email', 'firstName', 'lastName', 'address']
+                    where: { id: userId }
                 });
+                delete users.password
+                if (users.image) {
+                    users.image = new Buffer.from(users.image, 'base64').toString('binary')
+                }
             }
             resolve(users);
         } catch (e) {
@@ -91,9 +57,11 @@ let createNewUser = (data) => {
                     firstName: data.firstName,
                     lastName: data.lastName,
                     address: data.address,
-                    gender: data.gender === 1 ? true : false,
+                    gender: data.gender,
                     roleId: data.roleId,
-                    phonenumber: data.phonenumber
+                    phonenumber: data.phonenumber,
+                    positionId: data.positionId,
+                    image: data.image,
                 })
                 dataCreate.message = `OK!`
                 dataCreate.errCode = 0
@@ -130,6 +98,10 @@ let updateUser = (data) => {
                         firstName: data.firstName,
                         lastName: data.lastName,
                         address: data.address,
+                        gender: data.gender,
+                        phonenumber: data.phonenumber,
+                        positionId: data.positionId,
+                        image: data.image,
                     },
                     { where: { id: data.id } }
                 )
@@ -185,11 +157,55 @@ let foundUser = (id) => {
     })
 }
 
+let chancePassword = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let userData = {};
+            let isExist = await checkUserEmail(data.email);
+            if (isExist) {
+                let user = await db.User.findOne({
+                    attributes: ['email', 'password', 'roleId'],
+                    where: { email: data.email },
+                    raw: true
+                })
+                if (userData) {
+                    let check = await bcrypt.compareSync(data.CurrentPassword, user.password);
+                    if (check) {
+                        let hashUserPasswordFromBcrypt = await hashUserPassword(data.NewPassword);
+                        await db.User.updata(
+                            {
+                                password: hashUserPasswordFromBcrypt
+                            },
+                            {
+                                where: { email: data.email }
+                            }
+                        )
+                        userData.errCode = 0
+                        userData.message = `ok!`
+                    } else {
+                        userData.errCode = 3
+                        userData.message = `Your's passwork is wrong`
+                    }
+                } else {
+                    userData.message = `Your's email isn't exist`
+                    userData.errCode = 2
+                }
+            } else {
+                userData.message = `Your's email isn't exist`
+                userData.errCode = 2
+            }
+            resolve(userData)
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 module.exports = {
-    handUserLogin: handUserLogin,
     getAllUser: getAllUser,
     createNewUser: createNewUser,
     updateUser: updateUser,
     deleteUser: deleteUser,
     checkUserEmail: checkUserEmail,
+    chancePassword: chancePassword,
 }

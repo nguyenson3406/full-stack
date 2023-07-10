@@ -1,0 +1,77 @@
+.EditUser-content {
+    margin-top: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+
+    .back-list {
+        cursor: pointer;
+        text-align: left;
+
+        i {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    }
+
+    .title {
+        color: #0b5ed7;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .setting-option {
+        text-align: left;
+
+        .select {
+            color: #45c3d2;
+        }
+
+        div {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        div:hover {
+            color: #45c3d2;
+        }
+    }
+
+    .EditForm {
+        .avatar {
+            padding: 10px 5px;
+            border: 1px solid rgb(230, 230, 230);
+
+            label {
+                cursor: pointer;
+                width: 100%;
+                margin: 0px !important;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        .form-group {
+            text-align: left;
+
+            label {
+                margin-left: 3px;
+                margin-bottom: 5px;
+            }
+
+            input {
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .btn-controll {
+        margin-bottom: 20px;
+
+        button {
+            margin-right: 10px;
+        }
+    }
+}

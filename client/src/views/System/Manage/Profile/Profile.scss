@@ -1,0 +1,62 @@
+.Profile-container {
+    position: relative;
+    margin-top: 5px;
+    width: 100%;
+    min-height: 80%;
+    background: white;
+    color: black;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+
+    .Profile-content {
+        margin-top: 10px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+
+        .title {
+            color: #0b5ed7;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .Overview {
+            text-align: left;
+            justify-content: space-between;
+
+            .avatar {
+                margin: auto;
+                padding: 10px 5px;
+                border: 1px solid rgb(230, 230, 230);
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .info-user {
+                padding-top: 10px;
+
+                div {
+                    margin-bottom: 20px;
+
+                    .title {
+                        color: black;
+                        font-size: 16px;
+                        padding-right: 5px;
+                        font-weight: normal;
+                    }
+
+                    .eddit {
+                        cursor: pointer;
+                        color: black;
+                    }
+
+                    .eddit:hover {
+                        color: #45c3d2;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -17,6 +17,10 @@ const handUpdateUserApi = async (data) => {
         firstName: data.firstName,
         lastName: data.lastName,
         address: data.address,
+        gender: data.gender,
+        phonenumber: data.phonenumber,
+        positionId: data.positionId,
+        image: data.image,
     });
     return res
 }
@@ -26,4 +30,13 @@ const handDeleteUserApi = async (userId) => {
     return res
 }
 
-export { handGetUserApi, handNewUserApi, handUpdateUserApi, handDeleteUserApi }
+const handChancePassword = async (data) => {
+    let res = await axios.put(`http://localhost:8080/api/manage/chancePassword`, {
+        email: data.email,
+        CurrentPassword: data.CurrentPassword,
+        NewPassword: data.NewPassword,
+    });
+    return res
+}
+
+export { handGetUserApi, handNewUserApi, handUpdateUserApi, handDeleteUserApi, handChancePassword }
