@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { emitter } from "../../../../utils/emitter"
 import { toast } from 'react-toastify';
 import OriginAvata from '../../../../assets/images/profile-avatar-origin.jpg'
-import './CreateUser.scss'
 
 class CreateUser extends Component {
     constructor(props) {
@@ -15,7 +14,6 @@ class CreateUser extends Component {
             address: '',
             phonenumber: '',
             gender: '',
-            roleId: 'R2',
             avata: '',
             image: '',
         }
@@ -96,7 +94,7 @@ class CreateUser extends Component {
     render() {
         let { list } = this.props
         return (
-            <div className="CreateUser-content col-11">
+            <div className="Create-content col-11">
                 <div className="back-list">
                     <span onClick={list}>
                         <i className="fas fa-arrow-left"></i>

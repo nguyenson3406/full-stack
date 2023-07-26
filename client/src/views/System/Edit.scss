@@ -1,8 +1,9 @@
-.CreateNew-content {
+.Edit-content {
     margin-top: 10px;
     position: absolute;
     left: 50%;
     transform: translate(-50%);
+    min-height: 1000px;
 
     .back-list {
         cursor: pointer;
@@ -20,7 +21,24 @@
         font-weight: bold;
     }
 
-    .CreateForm {
+    .setting-option {
+        text-align: left;
+
+        .select {
+            color: #45c3d2;
+        }
+
+        div {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        div:hover {
+            color: #45c3d2;
+        }
+    }
+
+    .EditForm {
         .avatar {
             padding: 10px 5px;
             border: 1px solid rgb(230, 230, 230);

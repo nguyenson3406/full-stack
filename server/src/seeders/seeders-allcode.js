@@ -6,7 +6,7 @@ module.exports = {
         let addAllcode = await dataAllcode.map((item, index) => {
             queryInterface.bulkInsert('Allcode', [
                 {
-                    key: item.key, type: item.type, value_en: item.value_en, value_vi: item.value_vi, createdAt: new Date(), updatedAt: new Date()
+                    id: index + 1, key: item.key, type: item.type, value_en: item.value_en, value_vi: item.value_vi, createdAt: new Date(), updatedAt: new Date()
                 }
             ])
         });

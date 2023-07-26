@@ -7,6 +7,12 @@ module.exports = (sequelize, DataTypes) => {
 
         static associate(models) {
             // define association here
+            Allcode.hasMany(models.User, { foreignKey: 'positionId', sourceKey: 'key' })
+            Allcode.hasMany(models.User, { foreignKey: 'roleId', sourceKey: 'key' })
+            Allcode.hasMany(models.User, { foreignKey: 'gender', sourceKey: 'key' })
+            Allcode.hasMany(models.Doctor_Infor, { foreignKey: 'priceId', sourceKey: 'key' })
+            Allcode.hasMany(models.Doctor_Infor, { foreignKey: 'provinceId', sourceKey: 'key' })
+            Allcode.hasMany(models.Doctor_Infor, { foreignKey: 'paymentId', sourceKey: 'key' })
         }
     };
     Allcode.init({
@@ -17,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         modelName: 'Allcode',
+        tableName: 'Allcode',
     });
     return Allcode;
 };

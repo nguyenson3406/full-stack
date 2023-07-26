@@ -14,9 +14,6 @@ module.exports = {
             author: {
                 type: Sequelize.STRING
             },
-            description: {
-                type: Sequelize.TEXT
-            },
             image: {
                 type: Sequelize.BLOB('long')
             },

@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     Specialty.init({
         name: DataTypes.STRING,
         description: DataTypes.TEXT,
-        image: DataTypes.BLOB('long')
+        image: DataTypes.BLOB('long'),
+        servicesId: DataTypes.STRING,
+        show: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'Specialty',

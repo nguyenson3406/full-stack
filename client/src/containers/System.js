@@ -6,6 +6,9 @@ import { initSysRouter } from '../routes/sys'
 import NavSystem from '../views/Nav/NavSystem'
 import NavSystemCol from '../views/Nav/NavSystemCol'
 import Profile from '../views/System/Manage/Profile/Profile'
+import Edit from '../views/System/catalog/doctor/Edit'
+import CreateNew from '../views/System/catalog/doctor/CreateNew'
+import Schedule from '../views/System/management/schedule/Schedule'
 
 class System extends Component {
     render() {
@@ -18,8 +21,11 @@ class System extends Component {
                     </div>
                     <div className='content col-10'>
                         <Switch>
+                            <Route path="/admin/test"><Schedule></Schedule></Route>
+                            <Route path="/admin/catalog/doctor/new"><CreateNew></CreateNew></Route>
+                            <Route path="/admin/catalog/doctor/edit/:id"><Edit></Edit></Route>
                             <Route path="/admin/user/profile"><Profile></Profile></Route>
-                            <Route path={path.CATALOG_DOCTOR}>{initSysRouter.CATALOG_DOCTOR}</Route>
+                            <Route path={path.CATALOG_DOCTOR} exact>{initSysRouter.CATALOG_DOCTOR}</Route>
                             <Route path={path.USERMANAGE}>{initSysRouter.USERMANAGE}</Route>
                         </Switch>
                     </div>

@@ -1,158 +1,346 @@
 import React, { Component } from "react";
-import './CatalogDoctor.scss'
-import { handGetUserApi, handNewUserApi, handUpdateUserApi, handDeleteUserApi } from "../../../../services/manageServices"
+import { handGetDoctorApi, handShowDoctor, handDeleteDoctorApi } from "../../../../services/catalogDoctorServices"
 import { toast } from 'react-toastify';
-import Tab from 'react-bootstrap/Tab';
-import CreateNew from "./CreateNew";
-import Edit from "./Edit";
+import * as actions from '../../../../store/actions/index'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 class CatalogDoctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: '',
-            listUsers: '',
-            Tab: 'list'
+            listDoctor: '',
+            sortTitle: '',
+            idSortDown: false,
+            filterKey: '',
+            currentPage: 1,
+            rowPage: 5,
+            totalPage: '',
+            maxRow: '',
         }
     }
 
-    setTab = (Tab) => {
+    componentDidMount = async () => {
+        await this.handGetDoctorData()
+    }
+
+    handGetDoctorData = async () => {
+        let res = await handGetDoctorApi();
+        let { rowPage } = this.state
+        let isRes = res && res.data && res.data.errCode === 0
         this.setState({
-            Tab: Tab
+            listDoctor: isRes ? res.data.user : {},
+            maxRow: isRes ? res.data.user.length : 0,
+            totalPage: isRes ? Math.ceil(res.data.user.length / rowPage) : 1,
         })
     }
 
-    edit = (id) => {
-        this.setTab('edit')
+    newDoctor = () => {
+        this.props.history.push(`/admin/catalog/doctor/new`)
     }
 
-    async componentDidMount() {
-        await this.handGetUserData()
+    editDoctor = (id) => {
+        this.props.history.push(`/admin/catalog/doctor/edit/${id}`)
     }
 
-    handGetUserData = async () => {
-        let res = await handGetUserApi();
+    deleteDoctor = async (doctorId) => {
+        try {
+            let res = await handDeleteDoctorApi(doctorId);
+            if (res && res.data.errCode !== 0) {
+                toast.error(res.data.message, {
+                    className: 'toast-message'
+                })
+            } else {
+                await this.handGetDoctorData();
+                toast.success(`Delete success`, {
+                    className: 'toast-message'
+                })
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    showDoctor = async (doctorId) => {
+        try {
+            let data = {
+                id: doctorId,
+                show: !this.state.listDoctor.find(item => item.id === doctorId).Doctor_Infor.show
+            }
+            let res = await handShowDoctor(data);
+            if (res && res.data.errCode !== 0) {
+                toast.error(res.data.message, {
+                    className: 'toast-message'
+                })
+            } else {
+                await this.handGetDoctorData();
+                toast.success(`Change success`, {
+                    className: 'toast-message'
+                })
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    sortList = (key) => {
+        let sortTitle = this.state.sortTitle
+        let sortList = ''
+        if (key === sortTitle) {
+            sortList = this.sortDown(key)
+        } else {
+            sortList = this.sortUp(key)
+        }
         this.setState({
-            listUsers: res && res.data && res.data.errCode === 0 ? res.data.user : {}
+            listDoctor: sortList
         })
     }
 
-    showAvatar = () => {
-        let user = this.state.listUsers
-        let imageBase64 = '';
-        if (user.image) {
-            imageBase64 = new Buffer(user.image, 'base64').toString('binary')
+    sortUp = (key) => {
+        let copylistDoctor = ''
+        copylistDoctor = [...this.state.listDoctor].sort((a, b) =>
+            a[key] > b[key] ? 1 : -1
+        )
+        this.setState({
+            idSortDown: false,
+            sortTitle: key
+        })
+        return copylistDoctor;
+    }
+
+    sortDown = (key) => {
+        let copylistDoctor = ''
+        let keyDown = key
+        if (this.state.idSortDown) {
+            keyDown = 'id'
+            return this.sortUp(keyDown)
+        } else {
+            copylistDoctor = [...this.state.listDoctor].sort((a, b) =>
+                a[keyDown] < b[keyDown] ? 1 : -1
+            )
+        }
+        this.setState({
+            idSortDown: true,
+            sortTitle: keyDown
+        })
+        return copylistDoctor;
+    }
+
+    setClassSort = (title, isDown) => {
+        let { sortTitle, idSortDown } = this.state
+        if (isDown) {
+            if (sortTitle === title && idSortDown) {
+                return "select fas fa-long-arrow-alt-down"
+            }
+            return "fas fa-long-arrow-alt-down"
+        } else {
+            if (sortTitle === title && !idSortDown) {
+                return "select fas fa-long-arrow-alt-up"
+            }
+            return "fas fa-long-arrow-alt-up"
         }
     }
 
-    createNewUser = async (data) => {
-        try {
-            let res = await handNewUserApi(data);
-            if (res && res.data.errCode !== 0) {
-                toast.error(res.data.message, {
-                    className: 'toast-message'
-                })
-            } else {
-                await this.handGetUserData();
-            }
-        } catch (e) {
-            console.log(e)
-        }
+    setFilter = (event) => {
+        this.setState({
+            filterKey: event.target.value
+        })
     }
 
-    updateUser = async (data) => {
-        try {
-            let res = await handUpdateUserApi(data);
-            if (res && res.data.errCode !== 0) {
-                toast.error(res.data.message, {
-                    className: 'toast-message'
-                })
-            } else {
-                await this.handGetUserData();
-            }
-
-        } catch (e) {
-            console.log(e)
+    setPage = (event) => {
+        let { currentPage, totalPage } = this.state
+        switch (event) {
+            case 'next':
+                ++currentPage
+                break;
+            case 'prev':
+                --currentPage
+                break;
+            case 'first':
+                currentPage = 1
+                break;
+            default:
+                currentPage = totalPage
+                break;
         }
+        this.setState({
+            currentPage: currentPage
+        })
     }
 
-    deleteUser = async (userId) => {
-        try {
-            let res = await handDeleteUserApi(userId);
-            if (res && res.data.errCode !== 0) {
-                toast.error(res.data.message, {
-                    className: 'toast-message'
-                })
-            } else {
-                await this.handGetUserData();
-            }
-        } catch (e) {
-            console.log(e)
+    setRow = (event) => {
+        let { maxRow, currentPage } = this.state
+        if (maxRow === 0) {
+            return this.setState({
+                rowPage: event,
+                totalPage: 0,
+                currentPage: 0
+            })
+        }
+        if (event * currentPage > maxRow) {
+            this.setState({
+                rowPage: event,
+                totalPage: Math.ceil(maxRow / event),
+                currentPage: Math.ceil(maxRow / event)
+            })
+        } else {
+            this.setState({
+                rowPage: event,
+                totalPage: Math.ceil(maxRow / event)
+            })
         }
     }
 
     render() {
-        let { listUsers } = this.state;
+        let { listDoctor, filterKey, currentPage, rowPage, maxRow, totalPage } = this.state;
+        let minRowPage = (currentPage - 1) * rowPage + 1
+        let maxRowPage = currentPage * rowPage > maxRow ? maxRow : (currentPage * rowPage)
         return (
-            <div className="CatalogDoctor-background col-12">
-                <div className="CatalogDoctor-container col-12">
-                    <Tab.Container id="left-tabs-example" activeKey={this.state.Tab}>
-                        <Tab.Content>
-                            <Tab.Pane eventKey="list">
-                                <div className="CatalogDoctor-content col-11">
-                                    <p className="title">Doctor List</p>
-                                    <button className="btn-add-new btn btn-primary mb-3" onClick={() => this.setTab("create")}>
-                                        <i className="fas fa-plus"></i> Add New User</button>
-                                    <table className="table table-striped table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Email</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Address</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {listUsers && listUsers.length > 0 ?
-                                                listUsers.map((item, index) => {
-                                                    return (
-                                                        <tr key={item.id}>
-                                                            <td>{item.id}</td>
-                                                            <td>{item.email}</td>
-                                                            <td>{item.firstName}</td>
-                                                            <td>{item.lastName}</td>
-                                                            <td>{item.address}</td>
-                                                            <td>
-                                                                <button className="btn-edit">
-                                                                    <i className="fas fa-pencil-alt" onClick={() => this.edit(item.id)}></i>
-                                                                </button>
-                                                                <button className="btn-delete" onClick={() => this.delete(item.id)}>
-                                                                    <i className="fas fa-trash"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })
-                                                : null
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="create">
-                                <CreateNew list={() => this.setTab("list")}></CreateNew>
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="edit">
-                                <Edit list={() => this.setTab("list")}></Edit>
-                            </Tab.Pane>
-                        </Tab.Content>
-                    </Tab.Container>
+            <div className="List-background col-12">
+                <div className="List-container col-12">
+                    <div className="List-content col-11">
+                        <p className="title">Doctor List</p>
+                        <button className="btn-add-new btn btn-primary mb-3" onClick={() => this.newDoctor()}>
+                            <i className="fas fa-plus"></i> Add New User
+                        </button>
+                        <div className="search-content col-3 form-group row">
+                            <i className="fas fa-search"></i>
+                            <input type="text" className="form-control" placeholder="Tim kiem"
+                                onChange={(event) => this.setFilter(event)} value={filterKey}
+                            />
+                        </div>
+                        <table className="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th className="sortList"
+                                        onClick={() => this.sortList('email')}>
+                                        <span>Email</span>
+                                        <i className={this.setClassSort('email', true)}></i>
+                                        <i className={this.setClassSort('email', false)}></i>
+                                    </th>
+                                    <th className="sortList"
+                                        onClick={() => this.sortList('firstName')}>
+                                        <span>First Name</span>
+                                        <i className={this.setClassSort('firstName', true)}></i>
+                                        <i className={this.setClassSort('firstName', false)}></i>
+                                    </th>
+                                    <th className="sortList"
+                                        onClick={() => this.sortList('lastName')}>
+                                        <span>Last Name</span>
+                                        <i className={this.setClassSort('lastName', true)}></i>
+                                        <i className={this.setClassSort('lastName', false)}></i>
+                                    </th>
+                                    <th className="sortList"
+                                        onClick={() => this.sortList('address')}>
+                                        <span>Address</span>
+                                        <i className={this.setClassSort('address', true)}></i>
+                                        <i className={this.setClassSort('address', false)}></i>
+                                    </th>
+                                    <th>Show</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listDoctor && listDoctor.length > 0 ?
+                                    listDoctor.filter(item =>
+                                        filterKey.trim() === '' ? item
+                                            : item.email.includes(filterKey.trim()) ||
+                                            item.firstName.includes(filterKey.trim()) ||
+                                            item.lastName.includes(filterKey.trim()) ||
+                                            item.address.includes(filterKey.trim())
+                                    ).map((item, index) => {
+                                        if (minRowPage <= index || index <= maxRowPage) {
+                                            return (
+                                                <tr key={item.id}>
+                                                    <td>{index + 1}</td>
+                                                    <td>{item.email}</td>
+                                                    <td>{item.firstName}</td>
+                                                    <td>{item.lastName}</td>
+                                                    <td>{item.address}</td>
+                                                    <td className="show"><input type="checkbox" name="show"
+                                                        defaultChecked={item.Doctor_Infor.show}
+                                                        onClick={() => this.showDoctor(item.id)}
+                                                    />
+                                                    </td>
+                                                    <td>
+                                                        <button className="btn-edit" onClick={() => this.editDoctor(item.id)}>
+                                                            <i className="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                        <button className="btn-delete" onClick={() => this.deleteDoctor(item.id)}>
+                                                            <i className="fas fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        }
+                                    })
+                                    : null
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colSpan="7">
+                                        <div className="page-controll col-12 row">
+                                            <div className="Row-dropdown col-3 row">
+                                                <span className="col-8">Rows per page:</span>
+                                                <div className="box-row col-4">
+                                                    <span>{rowPage === maxRow ? 'All' : rowPage}<i className="fas fa-caret-down"></i></span>
+                                                    <div className="content-dropdown">
+                                                        <div onClick={() => this.setRow(5)}><span>5</span></div>
+                                                        <div onClick={() => this.setRow(10)}><span>10</span></div>
+                                                        <div onClick={() => this.setRow(25)}><span>25</span></div>
+                                                        <div onClick={() => this.setRow(maxRow)}><span>All</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row-number">
+                                                <span>{maxRow === 0 ? 0 : minRowPage}<span> - </span>
+                                                    {maxRowPage}
+                                                    <span> of </span>{maxRow}
+                                                </span>
+                                            </div>
+                                            <div className="chance-page">
+
+                                                <button onClick={() => this.setPage('first')}
+                                                    disabled={currentPage <= 1 ? true : false}>
+                                                    <i className="fas fa-angle-double-left"></i>
+                                                </button>
+                                                <button onClick={() => this.setPage('prev')}
+                                                    disabled={currentPage <= 1 ? true : false}>
+                                                    <i className="fas fa-chevron-left"></i>
+                                                </button>
+                                                <button onClick={() => this.setPage('next')}
+                                                    disabled={currentPage >= totalPage ? true : false}>
+                                                    <i className="fas fa-chevron-right"></i>
+                                                </button>
+                                                <button onClick={() => this.setPage('last')}
+                                                    disabled={currentPage >= totalPage ? true : false}>
+                                                    <i className="fas fa-angle-double-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         )
     }
 }
 
-export default CatalogDoctor
+const mapStateToProps = (state) => {
+    return {
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        MarkdownData: (data) => dispatch(actions.MarkdownData(data))
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CatalogDoctor))

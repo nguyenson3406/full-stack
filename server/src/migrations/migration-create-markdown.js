@@ -17,9 +17,6 @@ module.exports = {
             blogId: {
                 type: Sequelize.INTEGER
             },
-            contentHTML: {
-                type: Sequelize.TEXT('long')
-            },
             contentMarkdown: {
                 type: Sequelize.TEXT('long')
             },

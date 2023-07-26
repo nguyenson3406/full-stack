@@ -1,4 +1,4 @@
-.UserManage-background {
+.List-background {
     position: relative;
     margin-top: 5px;
     width: 100%;
@@ -6,7 +6,7 @@
     background: white;
     font-family: 'Poppins', sans-serif;
 
-    .UserManage-container {
+    .List-container {
         position: absolute;
         height: 90%;
         background-color: white;
@@ -18,7 +18,7 @@
         border-radius: 10px;
         font-size: 16px;
 
-        .UserManage-content {
+        .List-content {
             margin-top: 10px;
             position: absolute;
             left: 50%;
@@ -43,9 +43,9 @@
 
                 i {
                     display: flex !important;
+                    position: absolute;
                     width: 20px;
-                    top: 19%;
-                    transform: translate(0px, 25px);
+                    transform: translate(0px, 10px);
                     margin-left: 0px;
                     font-size: 17px;
                 }
@@ -81,11 +81,82 @@
                     border: 1px solid #ddd;
                 }
 
+                tfoot {
+                    background-color: white;
+                }
+
+                .show {
+                    text-align: center;
+                }
+
                 button {
                     border: none;
                     margin-right: 10px;
                     cursor: pointer;
                     background-color: transparent;
+                }
+
+                .page-controll {
+                    justify-content: flex-end;
+                    text-align: right;
+
+                    .row-number {
+                        width: 12%;
+                    }
+
+                    .chance-page {
+                        width: 13%;
+                    }
+
+                    .Row-dropdown {
+                        .box-row {
+                            cursor: pointer;
+
+                            i {
+                                padding-left: 10px;
+                            }
+
+                            .content-dropdown {
+                                display: none;
+                                position: absolute;
+                                margin-top: 5px;
+                                padding: 5px 0px;
+                                border-radius: 5px;
+                                background-color: white;
+                                border: 1px solid rgb(230, 230, 230);
+                                transform: translate(5px, -5px);
+
+                                div {
+                                    text-align: center;
+                                    padding: 3px 20px;
+                                }
+
+                                div:hover {
+                                    background-color: rgb(224, 224, 224);
+                                }
+                            }
+                        }
+
+                        .box-row:hover {
+                            .content-dropdown {
+                                display: inherit;
+                            }
+                        }
+
+                    }
+
+                    button {
+                        margin: 0px !important;
+                    }
+
+                    button:hover {
+                        opacity: 0.5;
+                    }
+
+                    button:hover:disabled {
+                        opacity: 1;
+                        cursor: default;
+                    }
                 }
 
                 .sortList {
@@ -116,40 +187,6 @@
 
                 .btn-delete {
                     color: red;
-                }
-            }
-
-            .pagination-content {
-                button {
-                    border: 1px solid rgb(197 197 197);
-                    border-radius: 0px;
-                    color: #45c3d2;
-
-                    i {
-                        font-size: 13px;
-                        opacity: 0.9;
-                    }
-                }
-
-                button:hover {
-                    background-color: #ddd;
-                }
-
-                .active:disabled {
-                    background-color: #0b5ed7;
-                    font-weight: 500;
-                    opacity: 1 !important;
-                    color: white;
-                }
-
-                .prev {
-                    margin-right: 3px;
-                    border-radius: 5px 0px 0px 5px
-                }
-
-                .next {
-                    margin-left: 3px;
-                    border-radius: 0px 5px 5px 0px
                 }
             }
         }

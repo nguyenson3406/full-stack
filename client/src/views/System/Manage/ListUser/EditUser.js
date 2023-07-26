@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { emitter } from "../../../../utils/emitter"
 import { toast } from 'react-toastify';
 import OriginAvata from '../../../../assets/images/profile-avatar-origin.jpg'
-import './EditUser.scss'
 
 class EditUser extends Component {
     constructor(props) {
@@ -26,7 +25,7 @@ class EditUser extends Component {
     }
 
     listenToEmitter() {
-        emitter.on('EDIT_RESET_DATA', (data) => {
+        emitter.on('USER_RESET_DATA', (data) => {
             this.setState({
                 id: data.id,
                 email: data.email,
@@ -88,7 +87,7 @@ class EditUser extends Component {
     render() {
         let { list } = this.props
         return (
-            <div className="EditUser-content col-11">
+            <div className="Edit-content col-11">
                 <div className="back-list">
                     <span onClick={list}>
                         <i className="fas fa-arrow-left"></i>

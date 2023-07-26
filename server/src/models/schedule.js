@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 
         static associate(models) {
             // define association here
+            Schedule.belongsTo(models.User, { foreignKey: 'doctorId', as: 'ScheduleData' })
         }
     };
     Schedule.init({
@@ -18,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         modelName: 'Schedule',
+        tableName: 'Schedule',
     });
     return Schedule;
 };

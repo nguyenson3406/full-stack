@@ -8,5 +8,5 @@ export const path = {
     SYSTEM: '/admin',
     LOGIN: '/admin/login',
     USERMANAGE: '/admin/user',
-    CATALOG_DOCTOR: '/admin/catalog',
+    CATALOG_DOCTOR: '/admin/catalog/doctor',
 };

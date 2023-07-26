@@ -11,9 +11,9 @@ class MarkDown extends Component {
         this.state = {
             data: this.props.dataMarkdown
         };
-
         this.handleChange = this.handleChange.bind(this);
         this.onEditorChange = this.onEditorChange.bind(this);
+        this.handleInstanceReady = this.handleInstanceReady.bind(this);
     }
 
     onEditorChange(evt) {
@@ -29,69 +29,75 @@ class MarkDown extends Component {
             data: changeEvent.target.value
         });
     }
+
+    handleInstanceReady({ editor }) {
+        editor.setData(this.props.dataMarkdown);
+    };
+
     render() {
-        console.log(this.state.data)
+        let { urlUpdate } = this.props
         return (
             <div className="MarkDown-container col-12">
                 <CKEditor
-                    initData={this.state.data}
+                    data={this.state.data}
+                    onInstanceReady={this.handleInstanceReady}
                     name="myeditor"
                     onChange={this.onEditorChange}
                     config={{
-                        toolbar: [
-                            {
-                                name: 'clipboard',
-                                items: ['Undo', 'Redo']
-                            },
-                            {
-                                name: 'styles',
-                                items: ['Format', 'Font', 'FontSize']
-                            },
-                            {
-                                name: 'colors',
-                                items: ['TextColor', 'BGColor']
-                            },
-                            {
-                                name: 'align',
-                                items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
-                            },
-                            '/',
-                            {
-                                name: 'basicstyles',
-                                items: ['Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat', 'CopyFormatting']
-                            },
-                            {
-                                name: 'links',
-                                items: ['Link', 'Unlink']
-                            },
-                            {
-                                name: 'paragraph',
-                                items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
-                            },
-                            {
-                                name: 'insert',
-                                items: ['Image', 'Embed', 'Table']
-                            },
-                            {
-                                name: 'tools',
-                                items: ['Maximize']
-                            },
-                            {
-                                name: 'editing',
-                                items: ['Scayt', 'Source']
-                            }
-                        ],
+                        // toolbar: [
+                        //     {
+                        //         name: 'clipboard',
+                        //         items: ['Undo', 'Redo']
+                        //     },
+                        //     {
+                        //         name: 'styles',
+                        //         items: ['Format', 'Font', 'FontSize']
+                        //     },
+                        //     {
+                        //         name: 'colors',
+                        //         items: ['TextColor', 'BGColor']
+                        //     },
+                        //     {
+                        //         name: 'align',
+                        //         items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+                        //     },
+                        //     '/',
+                        //     {
+                        //         name: 'basicstyles',
+                        //         items: ['Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat', 'CopyFormatting']
+                        //     },
+                        //     {
+                        //         name: 'links',
+                        //         items: ['Link', 'Unlink']
+                        //     },
+                        //     {
+                        //         name: 'paragraph',
+                        //         items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
+                        //     },
+                        //     {
+                        //         name: 'insert',
+                        //         items: ['Image', 'Embed', 'Table']
+                        //     },
+                        //     {
+                        //         name: 'tools',
+                        //         items: ['Maximize']
+                        //     },
+                        //     {
+                        //         name: 'editing',
+                        //         items: ['Scayt', 'Source']
+                        //     }
+                        // ],
 
                         extraAllowedContent: 'h3{clear};h2{line-height};h2 h3{margin-left,margin-top}',
 
                         extraPlugins: 'embed,autoembed,format,font,colorbutton,justify,uploadimage',
-                        uploadUrl: 'http://localhost:8080/api/manage/uploadFile',
+                        uploadUrl: urlUpdate,
 
                         embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}',
 
                         // filebrowserBrowseUrl: '/apps/ckfinder/3.4.5/ckfinder.html',
                         // filebrowserImageBrowseUrl: '/apps/ckfinder/3.4.5/ckfinder.html?type=Images',
-                        filebrowserUploadUrl: 'http://localhost:8080/api/manage/uploadFile',
+                        filebrowserUploadUrl: urlUpdate,
                         // filebrowserImageUploadUrl: '/apps/ckfinder/3.4.5/core/connector/php/connector.php?command=QuickUpload&type=Images',
                         removeDialogTabs: 'image:advanced;link:advanced',
                         removeButtons: 'PasteFromWord'

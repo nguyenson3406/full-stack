@@ -1,5 +1,6 @@
 import db from '../models/index';
 import bcrypt from 'bcryptjs';
+import { Op } from 'sequelize';
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -26,11 +27,22 @@ let getAllUser = (userId) => {
             let users = ''
             if (!userId) {
                 users = await db.User.findAll({
-                    attributes: ['id', 'email', 'firstName', 'lastName', 'address']
+                    attributes: ['id', 'email', 'firstName', 'lastName', 'address'],
+                    where: {
+                        [Op.or]: [
+                            { roleId: 'R1' },
+                            { roleId: 'R2' }]
+                    }
                 });
             } else {
                 users = await db.User.findOne({
-                    where: { id: userId }
+                    attributes: { exclude: ['createdAt', 'updatedAt'] },
+                    include: [
+                        { model: db.Allcode, as: 'genderData', attributes: ['value_en', 'value_vi'] },
+                        { model: db.Allcode, as: 'roleData', attributes: ['value_en', 'value_vi'] },
+                        { model: db.Allcode, as: 'positionData', attributes: ['value_en', 'value_vi'] },
+                    ],
+                    where: { id: userId },
                 });
                 delete users.password
                 if (users.image) {
@@ -58,7 +70,7 @@ let createNewUser = (data) => {
                     lastName: data.lastName,
                     address: data.address,
                     gender: data.gender,
-                    roleId: data.roleId,
+                    roleId: 'R2',
                     phonenumber: data.phonenumber,
                     positionId: data.positionId,
                     image: data.image,

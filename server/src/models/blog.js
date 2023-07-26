@@ -7,17 +7,18 @@ module.exports = (sequelize, DataTypes) => {
 
         static associate(models) {
             // define association here
+            Blog.hasOne(models.Markdown, { foreignKey: 'blogId' })
         }
     };
     Blog.init({
         name: DataTypes.STRING,
         author: DataTypes.STRING,
-        description: DataTypes.TEXT,
         image: DataTypes.BLOB('long'),
         show: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'Blog',
+        tableName: 'Blog',
     });
     return Blog;
 };

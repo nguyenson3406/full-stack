@@ -1,7 +1,6 @@
 import homeReducer from "./homeReducer";
 import userReducer from "./userReducer";
 import MarkdownReducer from "./MarkdownReducer";
-import CatalogReducer from "./CatalogReducer";
 import ProfileReducer from "./ProfileReducer";
 import { combineReducers } from 'redux'
 
@@ -36,7 +35,6 @@ const rootReducer = combineReducers({
     home: homeReducer,
     user: persistReducer(userPersistConfig, userReducer),
     markdown: MarkdownReducer,
-    catalog: CatalogReducer,
     profile: ProfileReducer,
 })
 // const persistedReducer = persistReducer(rootPersistConfig, rootReducer)

@@ -4,7 +4,7 @@ var appRoot = require('app-root-path');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, appRoot + "/src/public/image/")
+        cb(null, appRoot + "/src/public/image/Markdown/")
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname))

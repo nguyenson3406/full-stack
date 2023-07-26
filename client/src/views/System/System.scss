@@ -1,4 +1,7 @@
 @import '../../styles/styles.scss';
+@import './TableList.scss';
+@import './CreateNew.scss';
+@import './Edit.scss';
 
 .System-container {
     min-width: 100%;
@@ -28,6 +31,8 @@
                 height: 10px;
                 color: black;
             }
+
+
         }
     }
 }
