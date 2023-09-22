@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { emitter } from "../../../../utils/emitter"
 import { toast } from 'react-toastify';
 import OriginAvata from '../../../../assets/images/profile-avatar-origin.jpg'
+import { handUpdateUserApi } from "../../../../services/manageServices"
 
 class EditUser extends Component {
     constructor(props) {
@@ -71,7 +72,7 @@ class EditUser extends Component {
         })
     }
 
-    updateUser = () => {
+    validateUpdate = async () => {
         let data = this.state
         let arrInput = ['firstName', 'lastName', 'address']
         for (var i = 0; i < arrInput.length; i++) {
@@ -81,7 +82,27 @@ class EditUser extends Component {
                 }))
             }
         }
-        this.props.updateUser(data)
+        await this.updateUser(data)
+    }
+
+    updateUser = async (data) => {
+        try {
+            let res = await handUpdateUserApi(data);
+            if (res && res.data.errCode !== 0) {
+                toast.error(res.data.message, {
+                    className: 'toast-message'
+                })
+            } else {
+                this.props.getUser();
+                toast.success(`Chance info success`, {
+                    className: 'toast-message'
+                })
+                this.props.list()
+            }
+
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     render() {
@@ -169,7 +190,7 @@ class EditUser extends Component {
                     </div>
                 </div>
                 <div className="btn-controll mt-3">
-                    <button className="btn btn-primary" onClick={() => this.updateUser()}>
+                    <button className="btn btn-primary" onClick={() => this.validateUpdate()}>
                         Save
                     </button>
                     <button className="btn btn-secondary" onClick={list}>

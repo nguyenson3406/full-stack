@@ -5,12 +5,13 @@ import MarkDown from "../../../../components/MarkDown/MarkDown";
 import * as actions from '../../../../store/actions/index'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { handGetDoctorApi, handUpdateDoctorApi } from "../../../../services/catalogDoctorServices"
+import { handGetDoctorApi, handUpdateDoctorApi, handgetExtraInfoApi } from "../../../../services/catalogDoctorServices"
 
 class Edit extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             email: '',
             firstName: '',
             lastName: '',
@@ -27,6 +28,7 @@ class Edit extends Component {
             provinceId: '',
             paymentId: '',
             note: '',
+            extraInfo: '',
         }
 
     }
@@ -62,7 +64,16 @@ class Edit extends Component {
                 note: data.Doctor_Infor.note,
             })
             this.props.MarkdownData(data.Markdown.contentMarkdown)
+            await this.handGetExtraInfo()
         }
+    }
+
+    handGetExtraInfo = async () => {
+        let res = await handgetExtraInfoApi();
+        let isRes = res && res.data && res.data.errCode === 0
+        this.setState({
+            extraInfo: isRes ? res.data.data : {},
+        })
     }
 
     handleOnChange = (event, id) => {
@@ -104,6 +115,7 @@ class Edit extends Component {
                 }))
             }
         }
+        delete data.extraInfo
         data.Markdown = this.props.dataMarkdown
         this.updateDoctor(data)
     }
@@ -131,6 +143,7 @@ class Edit extends Component {
     }
 
     render() {
+        let { extraInfo } = this.state
         return (
             <div className="List-background col-12">
                 <div className="List-container col-12">
@@ -209,6 +222,14 @@ class Edit extends Component {
                                             onChange={(event) => this.handleOnChange(event, 'clinicId')}
                                             value={this.state.clinicId || ''}>
                                             <option hidden value=''>Choose...</option>
+                                            {extraInfo && extraInfo.clinics.length > 0 && extraInfo.clinics ?
+                                                extraInfo.clinics.map((item, index) => {
+                                                    return (
+                                                        <option key={index} value={item.id}>{item.name}</option>
+                                                    )
+                                                })
+                                                : null
+                                            }
                                         </select>
                                     </div>
                                     <div className="form-group col-md-4">
@@ -217,6 +238,14 @@ class Edit extends Component {
                                             onChange={(event) => this.handleOnChange(event, 'specialtyId')}
                                             value={this.state.specialtyId || ''}>
                                             <option hidden value=''>Choose...</option>
+                                            {extraInfo && extraInfo.specialtys.length > 0 && extraInfo.specialtys ?
+                                                extraInfo.specialtys.map((item, index) => {
+                                                    return (
+                                                        <option key={index} value={item.id}>{item.name}</option>
+                                                    )
+                                                })
+                                                : null
+                                            }
                                         </select>
                                     </div>
                                     <div className="form-group col-md-4">

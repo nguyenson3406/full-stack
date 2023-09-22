@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { emitter } from "../../../../utils/emitter"
 import { toast } from 'react-toastify';
 import OriginAvata from '../../../../assets/images/profile-avatar-origin.jpg'
+import { handNewUserApi } from "../../../../services/manageServices"
 
 class CreateUser extends Component {
     constructor(props) {
@@ -77,7 +78,7 @@ class CreateUser extends Component {
         })
     }
 
-    createNewUser = () => {
+    validateCreate = async () => {
         let data = this.state
         let arrInput = ['email', 'password', 'firstName', 'lastName', 'address', 'phonenumber', 'gender']
         for (var i = 0; i < arrInput.length; i++) {
@@ -87,8 +88,34 @@ class CreateUser extends Component {
                 }))
             }
         }
+        let isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+        if (!data.email.match(isValidEmail)) {
+            return (toast.error(`Enter valid Email!`, {
+                className: 'toast-message'
+            }))
+        }
         delete data.avata
-        this.props.createNewUser(data)
+        await this.createNewUser(data)
+    }
+
+
+    createNewUser = async (data) => {
+        try {
+            let res = await handNewUserApi(data);
+            if (res && res.data.errCode !== 0) {
+                toast.error(res.data.message, {
+                    className: 'toast-message'
+                })
+            } else {
+                this.props.getUser();
+                toast.success(`Create new user success`, {
+                    className: 'toast-message'
+                })
+                this.props.list()
+            }
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     render() {
@@ -169,7 +196,7 @@ class CreateUser extends Component {
                     </div>
                 </div>
                 <div className="btn-controll mt-3">
-                    <button className="btn btn-primary" onClick={() => this.createNewUser()}>
+                    <button className="btn btn-primary" onClick={() => this.validateCreate()}>
                         Add New
                     </button>
                     <button className="btn btn-secondary" onClick={list}>

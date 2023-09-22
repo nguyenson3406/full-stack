@@ -8,6 +8,9 @@ const initInforManagementRouter = (app) => {
     // router.use(verifyJWT.verifyAccessToken)
     router.get("/getAllSchedule", inforManagementControllers.getAllSchedule);
     router.post("/bulkSchedule", inforManagementControllers.bulkSchedule);
+    router.get("/getAllBooking", inforManagementControllers.getAllBooking);
+    router.get("/getAllDoctor", inforManagementControllers.getAllDoctor);
+    router.put("/updateBooking", inforManagementControllers.updateBooking);
     return app.use("/api/inforManagement", router)
 }
 

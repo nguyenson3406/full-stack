@@ -1,11 +1,31 @@
 import React, { Component } from "react";
 import './Blog.scss'
 import { Link } from "react-router-dom";
-import img from "../../../routes/img"
+import Logo from '../../../assets/images/logo/logo.svg'
 import Slider from "react-slick";
-import test from "../../../assets/images/cold.png"
+import { handGetBlogApi } from "../../../services/pageServices"
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 class Blog extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            blogList: ''
+        }
+    }
+
+    componentDidMount = async () => {
+        await this.handGetBlog()
+    }
+
+    handGetBlog = async () => {
+        let res = await handGetBlogApi()
+        let isRes = res && res.data && res.data.errCode === 0
+        this.setState({
+            blogList: isRes ? res.data.data : {}
+        })
+    }
 
     render() {
         let settings = {
@@ -15,85 +35,38 @@ class Blog extends Component {
             slidesToShow: 2,
             slidesToScroll: 1,
         };
+        let { blogList } = this.state
         return (
             <div className="Blog-container">
                 <div className="Blog-content">
                     <div className="title-content row col-12">
-                        <span className="col-5">Cẩm nang</span>
+                        <span className="col-5">{i18next.t("home.blog.title")}</span>
                         <div className="more-container col-2">
-                            <Link className="more" to='/todo'>
-                                Tat ca bai viet
+                            <Link className="more" to='/blog'>
+                                {i18next.t("home.blog.more")}
                             </Link>
                         </div>
                     </div>
                     <div className="slide-content">
                         <Slider className="col-12" {...settings}>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <div className="text-content">
-                                        <p className="title">Test booking 1</p>
-                                        <p className="description">
-                                            Description test booking 1
-                                        </p>
-                                    </div>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <div className="text-content">
-                                        <p className="title">Test booking 2</p>
-                                        <p className="description">
-                                            Description test booking 2
-                                        </p>
-                                    </div>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <div className="text-content">
-                                        <p className="title">Test booking 3</p>
-                                        <p className="description">
-                                            Description test booking 3
-                                        </p>
-                                    </div>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <div className="text-content">
-                                        <p className="title">Test booking 4</p>
-                                        <p className="description">
-                                            Description test booking 4
-                                        </p>
-                                    </div>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <div className="text-content">
-                                        <p className="title">Test booking 5</p>
-                                        <p className="description">
-                                            Description test booking 5
-                                        </p>
-                                    </div>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <div className="text-content">
-                                        <p className="title">Test booking 6</p>
-                                        <p className="description">
-                                            Description test booking 6
-                                        </p>
-                                    </div>
-                                </Link>
-                            </div>
+                            {blogList && blogList.length > 0 ?
+                                blogList.map((item, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <Link className="select" to={`/blog/${item.id}`}>
+                                                <img src={item.image ? item.image : Logo} />
+                                                <div className="text-content">
+                                                    <p className="title">{item.name}</p>
+                                                    <p className="description">
+                                                        {item.Markdown.description}
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    )
+                                })
+                                : null
+                            }
                         </Slider>
                     </div>
                 </div>
@@ -102,4 +75,4 @@ class Blog extends Component {
     }
 }
 
-export default Blog
+export default withTranslation()(Blog)

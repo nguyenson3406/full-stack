@@ -1,0 +1,142 @@
+{
+    "nav": {
+        "services": "Services",
+        "clinic": "Clinic",
+        "blog": "Blog",
+        "language": "English",
+        "search": "Search",
+        "doctor": "Doctor",
+        "help": "Support"
+    },
+    "home": {
+        "more": "More",
+        "header": {
+            "line_1": "Comprehensive",
+            "line_2": "health care medical platform"
+        },
+        "medicalFacility": "Medical Facility",
+        "outstandingDotor": "Outstanding Dotor",
+        "specialty": "Specialty",
+        "contact": {
+            "title": "CONTACT US",
+            "email": "support@testbooking.com",
+            "phonenumber": "1-800-123-4560",
+            "address": "No. 01, TestBooking, Ward 15, District 10, TestBooking"
+        },
+        "blog": {
+            "title": "Blog",
+            "more": "All"
+        }
+    },
+    "blog": {
+        "background": "Blog",
+        "title": "List of articles",
+        "more": "More"
+    },
+    "blogDetail": {
+        "author": "Author:",
+        "date": "Update:",
+        "previous": "Previous Blog",
+        "next": "Next Blog"
+    },
+    "booking": {
+        "close": "Close",
+        "save": "Save",
+        "gender": {
+            "title": "Gender",
+            "default": "Choose...",
+            "male": "Male",
+            "female": "Female",
+            "other": "Other"
+        },
+        "phone": "Phonenumber",
+        "address": "Address",
+        "email": "Email",
+        "lastName": "Last name",
+        "firstName": "First name",
+        "title": "Information on making an appointment",
+        "price-1": "Price:",
+        "price-2": "$."
+    },
+    "clinic": {
+        "title": "Clinic",
+        "default": "Countrywide"
+    },
+    "clinicDetail": {
+        "schedule": "Making an appointment",
+        "more": "More"
+    },
+    "doctorDeltail": {
+        "more": "More",
+        "moreInfo": {
+            "address": "ADDRESS:",
+            "price-1": "PRICE:",
+            "price-2": "$.",
+            "controll-show-1": "Details",
+            "price-3": "price:",
+            "price-4": "$",
+            "payment": "The clinic has a form of payment by",
+            "controll-show-2": "Collapse"
+        },
+        "schedule": {
+            "calendar": "Schedule",
+            "time": "There are currently no scheduled appointments, please choose another date"
+        }
+    },
+    "footer": {
+        "info": "TestBooking the product was created with the idea of ​​being used for making medical appointments",
+        "title-1": "Service",
+        "title-2": "Contact info",
+        "email": "support@testbooking.com",
+        "phonenumber": "1-800-123-4560",
+        "address": "No. 01, TestBooking, Ward 15, District 10, TestBooking",
+        "title-3": "Copyright © 2023 TestBooking"
+    },
+    "error404": {
+        "title-1": "Sorry, the page you were looking for not found.",
+        "title-2": "Back to Home"
+    },
+    "loading": "Loading",
+    "login": {
+        "title-1": "Login",
+        "label-1": "Username:",
+        "placeholder-1": "Enter your username",
+        "label-2": "Password:",
+        "placeholder-2": "Enter your password",
+        "forgot": "Forgot your password?",
+        "sumit": "Login",
+        "title-2": "Or sign in with:"
+    },
+    "services": {
+        "title-1": "Outstanding doctor",
+        "title-2": "Category"
+    },
+    "specialty": {
+        "default": "Countrywide",
+        "more": "More"
+    },
+    "navSystem": {
+        "language": "English",
+        "profile": "Profile",
+        "logout": "Logout",
+        "home": "Home",
+        "catalog": {
+            "title": "Category",
+            "doctor": "Doctor",
+            "specialty": "Specialty",
+            "clinic": "Clinic",
+            "blog": "Blog"
+        },
+        "infor": {
+            "title": "Schedule&Booking",
+            "schedule": "Schedule",
+            "booking": "Booking"
+        },
+        "user": {
+            "title": "Account",
+            "list": "Employee list",
+            "profile": "Profile"
+        }
+    },
+    "system": {}
+}

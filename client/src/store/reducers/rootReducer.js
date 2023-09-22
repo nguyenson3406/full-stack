@@ -1,4 +1,4 @@
-import homeReducer from "./homeReducer";
+import languageReducer from "./languageReducer";
 import userReducer from "./userReducer";
 import MarkdownReducer from "./MarkdownReducer";
 import ProfileReducer from "./ProfileReducer";
@@ -26,13 +26,19 @@ export const userPersistConfig = {
     whitelist: ['isLoggedIn', 'userInfo', 'accessToken']
 };
 
+export const languagePersistConfig = {
+    ...persistCommonConfig,
+    key: 'language',
+    whitelist: ['Language']
+};
+
 // const rootReducer = (state = {}, action) => ({
 //     home: homeReducer(state.home, action),
 //     user: userReducer(state.user, action),
 // })
 
 const rootReducer = combineReducers({
-    home: homeReducer,
+    language: persistReducer(languagePersistConfig, languageReducer),
     user: persistReducer(userPersistConfig, userReducer),
     markdown: MarkdownReducer,
     profile: ProfileReducer,

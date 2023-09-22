@@ -3,7 +3,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 import { initWebRouter } from '../routes/web'
 import { path } from '../utils';
 import ScrollToTop from '../components/HOC/ScrollToTop';
-import Home from '../components/Home';
+
 
 class Webside extends Component {
     render() {
@@ -14,11 +14,14 @@ class Webside extends Component {
                     <ScrollToTop>
                         <Switch>
                             <Route path={path.HOME} exact>{initWebRouter.HOME}</Route>
-                            <Route path={path.TODO} exact>{initWebRouter.TODO}</Route>
-                            <Route path={path.ABOUT} exact>{initWebRouter.ABOUT}</Route>
-                            <Route path={path.USER} exact>{initWebRouter.USER}</Route>
-                            <Route path={path.DETAIL_USER} exact>{initWebRouter.DETAIL_USER}</Route>
-                            <Route path='/test'><Home></Home></Route>
+                            <Route path={path.CLINIC} exact>{initWebRouter.CLINIC}</Route>
+                            <Route path={path.CLINIC_DETAIL}>{initWebRouter.CLINIC_DETAIL}</Route>
+                            <Route path={path.BLOG} exact>{initWebRouter.BLOG}</Route>
+                            <Route path={path.BLOG_DETAIL}>{initWebRouter.BLOG_DETAIL}</Route>
+                            <Route path={path.SERVICES_PAGE}>{initWebRouter.SERVICES_PAGE}</Route>
+                            <Route path={path.SPECIALTY_PAGE}>{initWebRouter.SPECIALTY_PAGE}</Route>
+                            <Route path={path.DOCTOR_DETAIL}>{initWebRouter.DOCTOR_DETAIL}</Route>
+                            <Route path={path.VERIFY_BOOKING}>{initWebRouter.VERIFY_BOOKING}</Route>
                             <Route path='*'>{initWebRouter.ERROR404}</Route>
                         </Switch>
                     </ScrollToTop>

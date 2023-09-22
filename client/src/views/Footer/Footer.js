@@ -2,10 +2,31 @@ import React, { Component } from "react";
 import './Footer.scss'
 import { Link, NavLink } from "react-router-dom";
 import logo from '../../assets/images/logo/logo.svg'
+import { handGetAllcodeApi } from "../../services/pageServices";
+import { connect } from 'react-redux'
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
+import * as actions from '../../store/actions/index';
 
 class Footer extends Component {
+    state = {
+        ServicesList: '',
+    }
 
+    componentDidMount = async () => {
+        await this.handGetSpecialty()
+    }
+
+    handGetSpecialty = async () => {
+        let res = await handGetAllcodeApi('SERVICES')
+        let isRes = res && res.data && res.data.errCode === 0
+        this.setState({
+            ServicesList: isRes ? res.data.allcode : {}
+        })
+    }
     render() {
+        let { ServicesList } = this.state
+        let value = this.props.Language.includes("en") ? "value_en" : "value_vi"
         return (
             <div className="footer-container">
                 <div className="footer-main row col-12">
@@ -14,7 +35,7 @@ class Footer extends Component {
                             <span><img src={logo} />TestBooking</span>
                         </NavLink>
                         <div className="info-web">
-                            <p>TestBooking san pham duoc tao len voi y tuong dung cho viec dat lich hen y te</p>
+                            <p>{i18next.t("footer.info")}</p>
                         </div>
                         <div className="footer-social">
                             <NavLink className="social-link" to='#'>
@@ -30,56 +51,54 @@ class Footer extends Component {
                     </div>
                     <div className="center-content col-3">
                         <div className="title-content">
-                            <p>Dich vu noi bat</p>
+                            <p>{i18next.t("footer.title-1")}</p>
                         </div>
                         <div className="link-content">
-                            <div className="link">
-                                <NavLink to='/todo'>
-                                    <span className="title">
-                                        <i className="fas fa-chevron-right"> </i>
-                                        Dich vu kham
-                                    </span>
-                                </NavLink>
-                                <NavLink to='/user'>
-                                    <span className="title">
-                                        <i className="fas fa-chevron-right"> </i>
-                                        Co so y te
-                                    </span>
-                                </NavLink>
-                            </div>
-                            <div className="link">
-                                <NavLink className="link" to='/todo'>
-                                    <span className="title">
-                                        <i className="fas fa-chevron-right"> </i>
-                                        Bac si
-                                    </span>
-                                </NavLink>
-                                <NavLink className="link" to='/about'>
-                                    <span className="title">
-                                        <i className="fas fa-chevron-right"> </i>
-                                        Cam nang
-                                    </span>
-                                </NavLink>
-                            </div>
+                            {ServicesList && ServicesList.length > 0 ?
+                                ServicesList.map((item, index) => {
+                                    return (
+                                        <div className="link" key={index}>
+                                            <Link className="select" to={`/services/${item.key_map}`}>
+                                                <span className="title">
+                                                    <i className="fas fa-chevron-right"> </i>
+                                                    <span>{item[value]}</span>
+                                                </span>
+                                            </Link>
+                                        </div>
+                                    )
+                                })
+                                : null}
                         </div>
                     </div>
                     <div className="right-content col-3">
                         <div className="title-content">
-                            <p>Thong tin lien he</p>
+                            <p>{i18next.t("footer.title-2")}</p>
                         </div>
                         <div className="body-content">
-                            <p><i className="fas fa-envelope"></i>support@testbooking.com</p>
-                            <p><i className="fas fa-phone"></i>1-800-123-4560</p>
-                            <p><i className="fas fa-map-marker-alt"></i>Số 01, TestBooking, Phường 15, Quận 10, TestBooking</p>
+                            <p><i className="fas fa-envelope"></i>{i18next.t("footer.email")}</p>
+                            <p><i className="fas fa-phone"></i>{i18next.t("footer.phonenumber")}</p>
+                            <p><i className="fas fa-map-marker-alt"></i>{i18next.t("footer.address")}</p>
                         </div>
                     </div>
                 </div>
                 <div className="footer-bottom">
-                    <p>Copyright © 2023 TestBooking</p>
+                    <p>{i18next.t("footer.title-3")}</p>
                 </div>
             </div>
         )
     }
 }
 
-export default Footer
+const mapStateToProps = (state) => {
+    return {
+        Language: state.language.Language,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeLanguage: (lang) => dispatch(actions.changeLanguage(lang))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Footer))

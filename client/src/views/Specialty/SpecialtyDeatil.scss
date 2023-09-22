@@ -1,0 +1,70 @@
+.SpecialtyDeatil {
+    font-size: 16px;
+
+    .Info-content {
+        margin: auto;
+        color: white;
+    }
+
+    .controll-list {
+        margin: auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+
+        .location-select {
+            select {
+                width: 75%;
+            }
+        }
+    }
+
+    .DetailDoctor {
+        background-color: white;
+        color: black;
+        margin: auto;
+        padding: 10px 0px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+
+        .Description-content {
+            border-right: 1px solid #e7e4e4;
+
+            .DoctorDescription {
+                margin: 15px 0px;
+
+                .img-doctor-content {
+                    width: 100px;
+                    height: 105px;
+                }
+            }
+        }
+
+        .Schedule-content {
+            .doctor-schedule {
+                margin-top: 10px;
+
+                .more-info {
+                    margin-top: 10px;
+                    border-left: 1px solid white;
+                    padding-left: 5px;
+
+                    .address {
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                        border-top: 1px solid #e7e4e4;
+                    }
+                }
+            }
+        }
+    }
+
+    .more-doctor {
+        margin: auto;
+        border: 1px solid #ccc;
+        color: #45c3d2;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+}

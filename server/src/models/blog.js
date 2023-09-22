@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             Blog.hasOne(models.Markdown, { foreignKey: 'blogId' })
+            Blog.belongsTo(models.Specialty, { foreignKey: 'specialtyId', as: 'specialtyBlogData' })
         }
     };
     Blog.init({

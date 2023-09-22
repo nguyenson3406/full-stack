@@ -112,7 +112,7 @@ class Profile extends Component {
                                         </div>
                                         <div className="col-md-12">
                                             <span className="title">Gender:</span>
-                                            <span>{dataProfile.gender ? dataProfile.gender : <span className="eddit" onClick={() => this.setTab('setting')}>Cap nhat</span>}</span>
+                                            <span>{dataProfile.genderData ? dataProfile.genderData.value_en : <span className="eddit" onClick={() => this.setTab('setting')}>Cap nhat</span>}</span>
                                         </div>
                                     </div>
                                     <div className="col-md-2">

@@ -109,8 +109,14 @@
                     }
 
                     .Row-dropdown {
+                        span {
+                            padding: 0px;
+                        }
+
                         .box-row {
+                            padding: 0px;
                             cursor: pointer;
+                            text-align: center;
 
                             i {
                                 padding-left: 10px;

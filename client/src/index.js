@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import reduxStrore, { persistor } from './redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import reportWebVitals from './reportWebVitals';
+import Languages from './components/Languages/Languages';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -16,7 +17,9 @@ root.render(
   <React.StrictMode>
     <Provider store={reduxStrore}>
       <PersistGate persistor={persistor}>
-        <App />
+        <Languages>
+          <App />
+        </Languages>
       </PersistGate>
     </Provider>
   </React.StrictMode>

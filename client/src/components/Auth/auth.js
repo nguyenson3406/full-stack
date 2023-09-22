@@ -8,7 +8,10 @@ import { refreshTokenApi, authLogin } from '../../services/userServices'
 class Auth extends Component {
     componentDidMount = async () => {
         let accessToken = this.props.accessToken;
-        let res = await authLogin(accessToken);
+        let res = ''
+        if (accessToken) {
+            res = await authLogin(accessToken);
+        }
         if (res) {
             let data = res.data;
             this.props.userLoginSuccess(data.user, accessToken);
@@ -30,7 +33,7 @@ class Auth extends Component {
                 {isLoggedIn ?
                     <></>
                     :
-                    <Redirect to={path.LOGIN} />
+                    <Redirect to={path.SYSTEM_LOGIN} />
                 }
             </>
         )

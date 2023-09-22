@@ -5,7 +5,7 @@ import MarkDown from "../../../../components/MarkDown/MarkDown";
 import * as actions from '../../../../store/actions/index'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { handNewDoctorApi } from "../../../../services/catalogDoctorServices"
+import { handNewDoctorApi, handgetExtraInfoApi } from "../../../../services/catalogDoctorServices"
 
 class CreateNew extends Component {
     constructor(props) {
@@ -28,14 +28,15 @@ class CreateNew extends Component {
             provinceId: '',
             paymentId: '',
             note: '',
+            extraInfo: '',
         }
     }
 
-    componentDidMount() {
-        this.reset()
+    componentDidMount = async () => {
+        await this.reset()
     }
 
-    reset = () => {
+    reset = async () => {
         let reset = {
             email: '',
             password: '',
@@ -59,6 +60,15 @@ class CreateNew extends Component {
             ...reset
         })
         this.props.ClearMarkdown()
+        await this.handGetExtraInfo()
+    }
+
+    handGetExtraInfo = async () => {
+        let res = await handgetExtraInfoApi();
+        let isRes = res && res.data && res.data.errCode === 0
+        this.setState({
+            extraInfo: isRes ? res.data.data : {},
+        })
     }
 
     handleOnChange = (event, id) => {
@@ -100,7 +110,15 @@ class CreateNew extends Component {
                 }))
             }
         }
+        let isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+        if (!data.email.match(isValidEmail)) {
+            return (toast.error(`Enter valid Email!`, {
+                className: 'toast-message'
+            }))
+        }
+        delete data.extraInfo
         data.Markdown = this.props.dataMarkdown
+        console.log(data)
         this.createNewDoctor(data)
     }
 
@@ -127,6 +145,8 @@ class CreateNew extends Component {
     }
 
     render() {
+        let { extraInfo } = this.state
+        console.log(extraInfo)
         return (
             <div className="List-background col-12">
                 <div className="List-container col-12">
@@ -207,6 +227,14 @@ class CreateNew extends Component {
                                             onChange={(event) => this.handleOnChange(event, 'clinicId')}
                                             value={this.state.clinicId || ''}>
                                             <option hidden value=''>Choose...</option>
+                                            {extraInfo && extraInfo.clinics.length > 0 && extraInfo.clinics ?
+                                                extraInfo.clinics.map((item, index) => {
+                                                    return (
+                                                        <option key={index} value={item.id}>{item.name}</option>
+                                                    )
+                                                })
+                                                : null
+                                            }
                                         </select>
                                     </div>
                                     <div className="form-group col-md-4">
@@ -215,6 +243,14 @@ class CreateNew extends Component {
                                             onChange={(event) => this.handleOnChange(event, 'specialtyId')}
                                             value={this.state.specialtyId || ''}>
                                             <option hidden value=''>Choose...</option>
+                                            {extraInfo && extraInfo.specialtys.length > 0 && extraInfo.specialtys ?
+                                                extraInfo.specialtys.map((item, index) => {
+                                                    return (
+                                                        <option key={index} value={item.id}>{item.name}</option>
+                                                    )
+                                                })
+                                                : null
+                                            }
                                         </select>
                                     </div>
                                     <div className="form-group col-md-4">

@@ -1,53 +1,39 @@
 import React, { Component } from "react";
-import Select from 'react-select'
-import { handGetDoctorApi, handAddScheduleApi } from "../../../../services/inforManagementServices"
+import { handGetScheduleApi, handAddScheduleApi } from "../../../../services/inforManagementServices"
 import { handGetAllcodeApi } from "../../../../services/pageServices"
 import './Schedule.scss'
 import { toast } from "react-toastify";
+import moment from 'moment/dist/moment';
+import SelectManagement from "../SelectManagement";
 
 class Schedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listDoctor: '',
-            minDate: '',
             currentDate: '',
-            doctorId: '',
             listSchedule: '',
             Allcode: '',
             timeSelect: '',
+            doctorId: '',
         }
     }
 
     componentDidMount = async () => {
-        this.getDate()
-        await this.handGetDoctorData()
+        let date = moment().add(1, 'days').format('YYYY-MM-DD')
         await this.handGetAllcodeData()
+        this.setState({
+            currentDate: date
+        })
     }
 
-    handGetDoctorData = async (doctorId) => {
-        let res = await handGetDoctorApi(doctorId);
+    handGetScheduleData = async (doctorId) => {
+        let res = await handGetScheduleApi(doctorId);
         let data = res && res.data && res.data.errCode === 0 ? res.data.doctor : {}
-        let copyList = []
-        if (!doctorId) {
-            if (data && data.length > 0) {
-                data.map((item, index) => {
-                    let position = item.positionData.value_en ? item.positionData.value_en : ''
-                    copyList[index] = {
-                        value: item.id,
-                        label: position + " " + item.lastName + " " + item.firstName
-                    }
-                })
-            }
-            this.setState({
-                listDoctor: copyList,
-            })
-        } else {
-            this.getTimeSelect('', data)
-            this.setState({
-                listSchedule: data && data > 0 ? data : '',
-            })
-        }
+        this.getTimeSelect('', data)
+        this.setState({
+            listSchedule: data && data > 0 ? data : '',
+            doctorId: doctorId,
+        })
     }
 
     handGetAllcodeData = async () => {
@@ -61,29 +47,10 @@ class Schedule extends Component {
         })
     }
 
-    getDate = () => {
-        let date = new Date()
-        date.setDate(date.getDate() + 1)
-        let newdate = "" + date.getFullYear()
-        newdate = date.getMonth() <= 8 ? newdate + "-0" + (date.getMonth() + 1) : newdate + "-" + (date.getMonth() + 1)
-        newdate = date.getDate() < 10 ? newdate + "-0" + date.getDate() : newdate + "-" + date.getDate()
+    handOnChange = (date) => {
+        this.getTimeSelect(date)
         this.setState({
-            minDate: newdate,
-            currentDate: newdate,
-        })
-    }
-
-    handOnChange = (event) => {
-        this.getTimeSelect(event.target.value)
-        this.setState({
-            currentDate: event.target.value
-        })
-    }
-
-    handOnChangeDoctorId = async (doctorId) => {
-        await this.handGetDoctorData(doctorId.value)
-        this.setState({
-            doctorId: doctorId.value
+            currentDate: date
         })
     }
 
@@ -98,7 +65,7 @@ class Schedule extends Component {
             list.map((item, index) => {
                 if (item.date.includes(date)) {
                     copyAllcode.forEach((value, key) => {
-                        if (value.key.includes(item.timeType)) {
+                        if (value.key_map.includes(item.timeType)) {
                             copyAllcode[key].isSelect = index
                         }
                     })
@@ -171,8 +138,6 @@ class Schedule extends Component {
     }
 
     render() {
-        console.log(this.state.Allcode)
-        console.log(this.state)
         let { Allcode } = this.state
         return (
             <div className="List-background col-12">
@@ -180,26 +145,18 @@ class Schedule extends Component {
                     <div className="List-content col-11">
                         <p className="title">Schedule List</p>
                         <div className="Schedule-select row col-12">
-                            <div className="form-group col-md-5">
-                                <label className="col-12">Doctor:</label>
-                                <Select className="Doctor-list" options={this.state.listDoctor}
-                                    onChange={this.handOnChangeDoctorId}
-                                />
-                            </div>
-                            <div className="form-group col-md-5">
-                                <label>Date:</label>
-                                <input className="form-control" type="date" name="date"
-                                    min={this.state.minDate} value={this.state.currentDate || this.state.minDate}
-                                    onChange={(event) => this.handOnChange(event)} />
-                            </div>
+                            <SelectManagement getId={(event) => this.handGetScheduleData(event)}
+                                getDate={(event) => this.handOnChange(event)} isBooking={false}
+                            ></SelectManagement>
+
                             <div className="Schedule-time form-group row col-12">
                                 {
                                     Allcode && Allcode.length > 0 ?
                                         Allcode.map((item, index) => {
                                             return (
-                                                <div className="form-group col-md-3">
+                                                <div className="form-group col-md-3" key={index}>
                                                     <div className={item.isSelect || item.isSelect === 0 ? "select-time select" : "select-time"}
-                                                        onClick={() => this.handScheduleList(item.key, item.isSelect)}>
+                                                        onClick={() => this.handScheduleList(item.key_map, item.isSelect)}>
                                                         <span>{item.value_en}</span>
                                                     </div>
                                                 </div>)
@@ -216,7 +173,7 @@ class Schedule extends Component {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
         )
     }
 }

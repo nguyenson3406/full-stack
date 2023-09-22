@@ -13,7 +13,9 @@
                 display: flex !important;
 
                 img {
+                    padding: 5px;
                     width: 50% !important;
+                    border: 1px solid rgb(230, 230, 230);
                 }
 
                 .text-content {
@@ -24,12 +26,18 @@
                     }
 
                     .title {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-height: 50%;
                         font-weight: bold;
-                        font-size: 18px !important;
+                        font-size: 16px !important;
                     }
 
                     .description {
-                        font-size: 15px !important;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-height: 50%;
+                        font-size: 14px !important;
                         opacity: 0.5;
                     }
 

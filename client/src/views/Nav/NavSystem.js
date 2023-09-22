@@ -6,14 +6,23 @@ import OriginAvata from '../../assets/images/profile-avatar-origin.jpg'
 import { handLogoutApi } from "../../services/userServices"
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index'
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 class NavSystem extends Component {
+
     handLogout = async () => {
         let res = await handLogoutApi()
         if (res.status === 200) {
             this.props.userLogout()
         }
     }
+
+    changeLanguage = (lng) => {
+        i18next.changeLanguage(lng)
+        this.props.changeLanguage(lng)
+    }
+
     render() {
         let dataUser = this.props.dataUser
         return (
@@ -21,18 +30,26 @@ class NavSystem extends Component {
                 <div className="nav-content row col-12">
                     <div className="left-content col-2">
                         <Link className="logo-content" to='/admin'>
-                            <span><img src={logo} />Administrator</span>
+                            <span><img src={logo} />
+                                Administrator
+                            </span>
                         </Link>
                     </div>
                     <div className="right-content col-5">
                         <div className="language-content col-3">
                             <i className="fas fa-globe title-language">
-                                <span className="title"> Tieng Viet </span>
+                                <span className="title"> {i18next.t("navSystem.language")} </span>
                                 <i className="fas fa-chevron-down down"></i>
                             </i>
                             <div className="dropdown-language">
-                                <span className="vi-language active">Tieng Viet</span>
-                                <span className="en-language">English</span>
+                                <span className="vi-language"
+                                    onClick={() => this.changeLanguage("vi")}>
+                                    Tiếng Việt
+                                </span>
+                                <span className="en-language"
+                                    onClick={() => this.changeLanguage("en")}>
+                                    English
+                                </span>
                             </div>
                         </div>
                         <div className="user-content col-4">
@@ -46,16 +63,19 @@ class NavSystem extends Component {
                             </div>
                             <div className="dropdown-user">
                                 <div className="title-dropdown">
-                                    <p>Welcome Admin!</p>
+                                    <p>{dataUser.roleId.includes('R3') ? <>Welcome Doctor!</> : <>Welcome Admin!</>}</p>
                                     {dataUser ? dataUser.firstName : ''}
                                 </div>
                                 <div className="content-dropdown">
                                     <span className="profile">
-                                        <i className="fas fa-user user"></i> Trang ca nhan</span>
+                                        <Link to='/admin/user/profile'>
+                                            <i className="fas fa-user user"></i> {i18next.t("navSystem.profile")}
+                                        </Link>
+                                    </span>
                                     <span className="logout"
                                         onClick={() => this.handLogout()}>
                                         <span className="title">
-                                            <i className="fas fa-sign-out-alt"></i> Dang xuat
+                                            <i className="fas fa-sign-out-alt"></i> {i18next.t("navSystem.logout")}
                                         </span>
                                     </span>
                                 </div>
@@ -70,13 +90,15 @@ class NavSystem extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        dataUser: state.user.userInfo
+        dataUser: state.user.userInfo,
+        Language: state.language.Language,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        userLogout: () => dispatch(actions.Logout())
+        userLogout: () => dispatch(actions.Logout()),
+        changeLanguage: (lang) => dispatch(actions.changeLanguage(lang))
     }
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavSystem))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withTranslation()(NavSystem)))

@@ -29,10 +29,16 @@ const handShowDoctor = async (data) => {
     return res
 }
 
+const handgetExtraInfoApi = async () => {
+    let res = await axios.get(`http://localhost:8080/api/catalogDoctor/getExtraInfo`);
+    return res
+}
+
 export {
     handGetDoctorApi,
     handNewDoctorApi,
     handUpdateDoctorApi,
     handDeleteDoctorApi,
-    handShowDoctor
+    handShowDoctor,
+    handgetExtraInfoApi,
 }

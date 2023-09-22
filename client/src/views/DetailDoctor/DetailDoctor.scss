@@ -1,0 +1,21 @@
+.DetailDoctor-container {
+    color: black;
+    padding: 20px 20px;
+    font-size: 16px;
+
+    .DetailDoctor-content {
+        margin: auto;
+
+        .DetailDoctor-top {
+            padding: 15px 5px;
+            background-color: white;
+        }
+
+        .DetailDoctor-body {
+            margin-top: 20px;
+            background-color: white;
+            padding: 10px 25px;
+            text-align: left;
+        }
+    }
+}

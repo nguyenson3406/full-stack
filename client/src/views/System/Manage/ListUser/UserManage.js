@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { handGetUserApi, handNewUserApi, handUpdateUserApi, handDeleteUserApi } from "../../../../services/manageServices"
+import { handGetUserApi, handDeleteUserApi } from "../../../../services/manageServices"
 import CreateUser from "./CreateUser";
 import EditUser from "./EditUser";
 import { emitter } from "../../../../utils/emitter"
@@ -10,15 +10,14 @@ class UserManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: '',
             listUsers: '',
             sortTitle: '',
             idSortDown: false,
             filterKey: '',
             currentPage: 1,
             rowPage: 5,
-            totalPage: '',
-            maxRow: '',
+            totalPage: 1,
+            maxRow: 0,
             Tab: 'list'
         }
     }
@@ -30,11 +29,11 @@ class UserManage extends Component {
     handGetUserData = async () => {
         let res = await handGetUserApi();
         let { rowPage } = this.state
-        let isRes = res && res.data && res.data.errCode === 0
+        let data = res && res.data && res.data.errCode === 0 ? res.data.user : {}
         this.setState({
-            listUsers: isRes ? res.data.user : {},
-            maxRow: isRes ? res.data.user.length : 0,
-            totalPage: isRes ? Math.ceil(res.data.user.length / rowPage) : 1,
+            listUsers: data ? data : {},
+            maxRow: data ? data.length : 0,
+            totalPage: data ? Math.ceil(data.length / rowPage) : 1,
         })
     }
 
@@ -48,51 +47,11 @@ class UserManage extends Component {
     editUser = async (userId) => {
         let res = await handGetUserApi(userId);
         let data = res && res.data && res.data.errCode === 0 ? res.data.user : {};
-        console.log(data)
         emitter.emit('USER_RESET_DATA', data)
         this.setState({
             userId: userId,
             Tab: 'edit'
         })
-    }
-
-    createNewUser = async (data) => {
-        try {
-            let res = await handNewUserApi(data);
-            if (res && res.data.errCode !== 0) {
-                toast.error(res.data.message, {
-                    className: 'toast-message'
-                })
-            } else {
-                await this.handGetUserData();
-                toast.success(`Create new user success`, {
-                    className: 'toast-message'
-                })
-                this.setTab('list')
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    updateUser = async (data) => {
-        try {
-            let res = await handUpdateUserApi(data);
-            if (res && res.data.errCode !== 0) {
-                toast.error(res.data.message, {
-                    className: 'toast-message'
-                })
-            } else {
-                await this.handGetUserData();
-                toast.success(`Chance info success`, {
-                    className: 'toast-message'
-                })
-                this.setTab('list')
-            }
-
-        } catch (e) {
-            console.log(e)
-        }
     }
 
     deleteUser = async (userId) => {
@@ -174,6 +133,23 @@ class UserManage extends Component {
         })
     }
 
+    getFilter = (data) => {
+        let filterKey = this.state.filterKey
+        let arrValue = ['id', 'email', 'firstName', 'lastName', 'address']
+        if (filterKey.trim() === '') {
+            return data
+        } else {
+            for (let i = 1; i < arrValue.length; i++) {
+                if (data[arrValue[i]]) {
+                    if (data[arrValue[i]].includes(filterKey.trim())) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+
     setPage = (event) => {
         let { currentPage, totalPage } = this.state
         switch (event) {
@@ -221,6 +197,7 @@ class UserManage extends Component {
     render() {
         let { listUsers, filterKey, currentPage, rowPage, maxRow, totalPage } = this.state;
         let minRowPage = (currentPage - 1) * rowPage + 1
+        console.log(listUsers)
         let maxRowPage = currentPage * rowPage > maxRow ? maxRow : (currentPage * rowPage)
         return (
             <div className="List-background col-12">
@@ -274,13 +251,7 @@ class UserManage extends Component {
                                         </thead>
                                         <tbody>
                                             {listUsers && listUsers.length > 0 ?
-                                                listUsers.filter(item =>
-                                                    filterKey.trim() === '' ? item
-                                                        : item.email.includes(filterKey.trim()) ||
-                                                        item.firstName.includes(filterKey.trim()) ||
-                                                        item.lastName.includes(filterKey.trim()) ||
-                                                        item.address.includes(filterKey.trim())
-                                                ).map((item, index) => {
+                                                listUsers.filter(this.getFilter).map((item, index) => {
                                                     if (minRowPage <= index || index <= maxRowPage) {
                                                         return (
                                                             <tr key={item.id}>
@@ -320,12 +291,7 @@ class UserManage extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="row-number">
-                                                            <span>{maxRow === 0 ? 0 : minRowPage}<span> - </span>
-                                                                {maxRowPage}
-                                                                <span> of </span>{maxRow}
-                                                            </span>
-                                                        </div>
+
                                                         <div className="chance-page">
 
                                                             <button onClick={() => this.setPage('first')}
@@ -354,11 +320,13 @@ class UserManage extends Component {
                             </Tab.Pane>
                             <Tab.Pane eventKey="create">
                                 <CreateUser list={() => this.setTab("list")}
-                                    createNewUser={(event) => this.createNewUser(event)} ></CreateUser>
+                                    getUser={() => this.handGetUserData()}
+                                ></CreateUser>
                             </Tab.Pane>
                             <Tab.Pane eventKey="edit">
                                 <EditUser list={() => this.setTab("list")}
-                                    updateUser={(event) => this.updateUser(event)} ></EditUser>
+                                    getUser={() => this.handGetUserData()}
+                                ></EditUser>
                             </Tab.Pane>
                         </Tab.Content>
                     </Tab.Container>

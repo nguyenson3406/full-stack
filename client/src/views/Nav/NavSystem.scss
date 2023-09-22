@@ -119,6 +119,14 @@
                 cursor: pointer;
                 padding-left: 10px;
 
+                a {
+                    color: black;
+                }
+
+                a:hover {
+                    color: #45c3d2;
+                }
+
                 i {
                     color: black;
                 }
@@ -213,7 +221,7 @@
                     content: "";
                     position: absolute;
                     top: -7%;
-                    left: 70%;
+                    left: 33%;
                     margin-left: -5px;
                     border-width: 5px;
                     border-style: solid;

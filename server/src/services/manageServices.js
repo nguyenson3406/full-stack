@@ -220,4 +220,5 @@ module.exports = {
     deleteUser: deleteUser,
     checkUserEmail: checkUserEmail,
     chancePassword: chancePassword,
+    foundUser: foundUser,
 }

@@ -11,6 +11,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <Router>
           <ScrollToTop>
             <Switch>
-              <Route path={path.LOGIN}><Auth isLogin='true'></Auth>{initWebRouter.LOGIN}</Route>
+              <Route path={path.SYSTEM_LOGIN}><Auth isLogin='true'></Auth>{initWebRouter.SYSTEM_LOGIN}</Route>
               <Route path={path.SYSTEM}><Auth isLogin='false'></Auth>{initWebRouter.SYSTEM}</Route>
               <Route path='/'><Webside></Webside></Route>
             </Switch>
@@ -41,5 +42,4 @@ function App() {
   );
 }
 
-export default App;
-
+export default withTranslation()(App);

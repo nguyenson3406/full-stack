@@ -1,0 +1,50 @@
+.ClinicInfo-header {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 12%;
+    min-height: 250px;
+
+    .header-top {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25), transparent);
+        min-height: 250px;
+    }
+
+    .header-content {
+        position: absolute;
+        min-height: 120px;
+        bottom: -10% !important;
+        background-image: linear-gradient(transparent, white);
+        color: black;
+        margin: auto;
+        padding: 10px 0px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+
+        .header-img {
+            img {
+                padding-top: 5px;
+                width: 50% !important;
+            }
+        }
+
+        .header-info {
+            text-align: left;
+
+            p {
+                font-size: 26px;
+                font-weight: 600;
+                margin-bottom: 0px;
+            }
+
+            span {
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+.ClinicInfo-body {
+    margin-top: 35px;
+    text-align: left;
+}

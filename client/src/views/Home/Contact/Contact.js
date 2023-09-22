@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import './Contact.scss'
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 class Contact extends Component {
     render() {
         return (
             <div className="Contact">
                 <div className="title-content">
-                    <h2>LIÊN HỆ VỚI CHÚNG TÔI</h2>
+                    <h2>{i18next.t("home.contact.title")}</h2>
                 </div>
                 <div className="body-content">
-                    <p><i className="fas fa-envelope"></i>support@testbooking.com</p>
-                    <p><i className="fas fa-phone"></i>1-800-123-4560</p>
-                    <p><i className="fas fa-map-marker-alt"></i>Số 01, TestBooking, Phường 15, Quận 10, TestBooking</p>
+                    <p><i className="fas fa-envelope"></i>{i18next.t("home.contact.email")}</p>
+                    <p><i className="fas fa-phone"></i>{i18next.t("home.contact.phonenumber")}</p>
+                    <p><i className="fas fa-map-marker-alt"></i>{i18next.t("home.contact.address")}</p>
                 </div>
             </div>
         )
     }
 }
 
-export default Contact
+export default withTranslation()(Contact)

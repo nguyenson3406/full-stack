@@ -1,0 +1,56 @@
+.Remedy-content {
+    .modal-header {
+        padding: 10px;
+
+        .header-content {
+            padding: 0px 10px;
+
+            .title {
+                font-size: 15px;
+                font-weight: 600;
+            }
+
+            .close {
+                float: right;
+                cursor: pointer;
+                font-size: 15px;
+            }
+
+            .close:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+
+    .modal-body {
+        padding-top: 5px;
+        height: 100px;
+
+        .RemedyForm {
+            margin: auto;
+            padding: 0px;
+            padding-top: 8px;
+
+            .input-email {
+                padding-left: 0px;
+            }
+
+            .input-file {
+                padding-right: 0px;
+
+                input {
+                    padding-top: 3px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .RemedyForm {
+        padding-left: 10px;
+    }
+
+    .modal-footer {
+        padding: 7px 10px;
+    }
+}

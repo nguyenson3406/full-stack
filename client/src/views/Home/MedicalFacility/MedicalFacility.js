@@ -1,66 +1,62 @@
 import React, { Component } from "react";
 import './MedicalFacility.scss'
 import { Link } from "react-router-dom";
-import img from "../../../routes/img"
+import Logo from '../../../assets/images/logo/logo.svg'
 import Slider from "react-slick";
-import test from "../../../assets/images/cold.png"
+import { handGetClinicApi } from "../../../services/pageServices"
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 class MedicalFacility extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            clinicList: ''
+        }
+    }
+
+    componentDidMount = async () => {
+        await this.handGetClinic()
+    }
+
+    handGetClinic = async () => {
+        let res = await handGetClinicApi()
+        let isRes = res && res.data && res.data.errCode === 0
+        this.setState({
+            clinicList: isRes ? res.data.data : {}
+        })
     }
 
     render() {
         let { settings } = this.props
+        let { clinicList } = this.state
         return (
             <div className="MedicalFacility-container">
                 <div className="MedicalFacility-content">
                     <div className="title-content row col-12">
-                        <span className="col-5">Cơ sở y tế nổi bật</span>
+                        <span className="col-5">{i18next.t("home.medicalFacility")}</span>
                         <div className="more-container col-2">
-                            <Link className="more" to='/todo'>
-                                Xem them
+                            <Link className="more" to='/clinic'>
+                                {i18next.t("home.more")}
                             </Link>
                         </div>
                     </div>
                     <div className="slide-content">
                         <Slider className="col-12" {...settings}>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <p className="title">Test booking 1</p>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <p className="title">Test booking 2</p>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <p className="title">Test booking 3</p>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <p className="title">Test booking 4</p>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <p className="title">Test booking 5</p>
-                                </Link>
-                            </div>
-                            <div>
-                                <Link className="select" to='/todo'>
-                                    <img src={test} />
-                                    <p className="title">Test booking 6</p>
-                                </Link>
-                            </div>
+                            {clinicList && clinicList.length > 0 ?
+                                clinicList.map((item, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <Link className="select" to={`/clinic/${item.id}`}>
+                                                <img src={item.image ? item.image : Logo} />
+                                                <p className="title">{item.name}</p>
+                                            </Link>
+                                        </div>
+                                    )
+                                })
+                                : null
+                            }
+
                         </Slider>
                     </div>
                 </div>
@@ -69,4 +65,4 @@ class MedicalFacility extends Component {
     }
 }
 
-export default MedicalFacility
+export default withTranslation()(MedicalFacility)
