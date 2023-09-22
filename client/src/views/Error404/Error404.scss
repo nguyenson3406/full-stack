@@ -1,0 +1,29 @@
+.Error404-container {
+    color: black;
+    background-color: white;
+    padding: 20px 0px;
+
+    img {
+        width: 400px;
+    }
+
+    p {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 20px;
+        cursor: default;
+    }
+
+    a {
+        color: white;
+        background-color: #45c3d2;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+    }
+
+    a:hover {
+        opacity: 0.8;
+    }
+}

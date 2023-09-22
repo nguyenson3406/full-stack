@@ -1,0 +1,23 @@
+.ServicesBanner {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 15%;
+
+
+    .ServicesBanner-container {
+        min-height: 200px;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25), transparent);
+
+        .ServicesBanner-content {
+            position: absolute;
+            top: 20%;
+            left: 43%;
+
+            p {
+                font-size: 25px;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+        }
+    }
+}

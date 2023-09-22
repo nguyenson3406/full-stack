@@ -1,0 +1,15 @@
+.Specialty-container {
+    background-color: white;
+    padding-top: 15px;
+
+    .Specialty-content {
+        margin: 0px 40px;
+        padding: 30px 40px 10px;
+        height: 350px;
+
+        img {
+            padding: 5px;
+            border: 1px solid rgb(230, 230, 230);
+        }
+    }
+}

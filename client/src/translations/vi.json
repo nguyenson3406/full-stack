@@ -1,0 +1,142 @@
+{
+    "nav": {
+        "services": "Dịch vụ khám",
+        "clinic": "Cơ sở y tế",
+        "blog": "Cẩm nang",
+        "language": "Tiếng Việt",
+        "search": "Tìm kiếm",
+        "doctor": "Bác sĩ",
+        "help": "Hỗ trợ"
+    },
+    "home": {
+        "more": "Xem thêm",
+        "header": {
+            "line_1": "Nền tảng y tế",
+            "line_2": "chăm sóc sức khỏe toàn diện"
+        },
+        "medicalFacility": "Cơ sở y tế nổi bật",
+        "outstandingDotor": "Bác sĩ nổi bật",
+        "specialty": "Chuyên khoa phổ biến",
+        "contact": {
+            "title": "LIÊN HỆ VỚI CHÚNG TÔI",
+            "email": "support@testbooking.com",
+            "phonenumber": "1-800-123-4560",
+            "address": "Số 01, TestBooking, Phường 15, Quận 10, TestBooking"
+        },
+        "blog": {
+            "title": "Cẩm nang",
+            "more": "Tất cả bài viết"
+        }
+    },
+    "blog": {
+        "background": "Cẩm nang",
+        "title": "Danh sách bài viết",
+        "more": "Xem thêm"
+    },
+    "blogDetail": {
+        "author": "Tác giả:",
+        "date": "Cập nhật:",
+        "previous": "Bài viết trước",
+        "next": "Bài viết tiếp theo"
+    },
+    "booking": {
+        "close": "Đóng",
+        "save": "Lưu",
+        "gender": {
+            "title": "Giới tính",
+            "default": "Lựu chọn...",
+            "male": "Nam",
+            "female": "Nữ",
+            "other": "Khác"
+        },
+        "phone": "Số điện thoại",
+        "address": "Địa chỉ",
+        "email": "Email",
+        "lastName": "Họ",
+        "firstName": "Tên",
+        "title": "Thông tin đặt lịch khám",
+        "price-1": "Giá khám:",
+        "price-2": "VND."
+    },
+    "clinic": {
+        "title": "Cơ sở y tế",
+        "default": "Toàn quốc"
+    },
+    "clinicDetail": {
+        "schedule": "Đặt lịch hẹn",
+        "more": "Xem thêm"
+    },
+    "doctorDeltail": {
+        "more": "Xem thêm",
+        "moreInfo": {
+            "address": "ĐỊA CHỈ KHÁM:",
+            "price-1": "GIÁ KHÁM:",
+            "price-2": "VND.",
+            "controll-show-1": "Xem chi tiết",
+            "price-3": "Giá khám:",
+            "price-4": "VND",
+            "payment": "Phòng khám có hình thức thanh toán chi phí bằng",
+            "controll-show-2": "Thu gọn"
+        },
+        "schedule": {
+            "calendar": "Lịch Khám",
+            "time": "Hiện tại không có lịch khám xin vui lòng chọn ngày khác"
+        }
+    },
+    "footer": {
+        "info": "TestBooking sản phẩm được tạo lên với ý tưởng dùng cho việc đặt lịch hẹn y tế",
+        "title-1": "Dịch vụ nổi bật",
+        "title-2": "Thông tin liên hệ",
+        "email": "support@testbooking.com",
+        "phonenumber": "1-800-123-4560",
+        "address": "Số 01, TestBooking, Phường 15, Quận 10, TestBooking",
+        "title-3": "Copyright © 2023 TestBooking"
+    },
+    "error404": {
+        "title-1": "Sorry, the page you were looking for not found.",
+        "title-2": "Back to Home"
+    },
+    "loading": "Loading",
+    "login": {
+        "title-1": "Đăng nhập",
+        "label-1": "Tài khoản:",
+        "placeholder-1": "Nhập tài khoản của bản",
+        "label-2": "Mật khẩu:",
+        "placeholder-2": "Nhập mật khẩu của bạn",
+        "forgot": "Quên mật khẩu của bạn?",
+        "sumit": "Đăng nhập",
+        "title-2": "Hoặc đăng nhập với:"
+    },
+    "services": {
+        "title-1": "Bác sĩ nổi bật",
+        "title-2": "Danh mục"
+    },
+    "specialty": {
+        "default": "Toàn quốc",
+        "more": "Xem thêm"
+    },
+    "navSystem": {
+        "language": "Tiếng Việt",
+        "profile": "Trang cá nhân",
+        "logout": "Đăng xuất",
+        "home": "Trang chủ",
+        "catalog": {
+            "title": "Quản lý danh mục",
+            "doctor": "Danh mục bác sĩ",
+            "specialty": "Danh mục chuyên khoa",
+            "clinic": "Cơ sở y tế",
+            "blog": "Danh mục bài viết"
+        },
+        "infor": {
+            "title": "Quản lý lịch hẹn",
+            "schedule": "Lịch trình bác sĩ",
+            "booking": "Lịch hẹn"
+        },
+        "user": {
+            "title": "Tài khoản",
+            "list": "Danh sách tài khoản",
+            "profile": "Trang cá nhân"
+        }
+    },
+    "system": {}
+}

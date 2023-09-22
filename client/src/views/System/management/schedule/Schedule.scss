@@ -1,0 +1,54 @@
+.Schedule-select {
+    margin-top: 20px;
+    justify-content: space-between;
+
+    label {
+        float: left;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    .Doctor-list {
+        text-align: left !important;
+    }
+
+    .Schedule-time {
+        margin-top: 20px;
+        padding-left: 30px;
+
+        .form-group {
+            margin: 10px 0px;
+
+            .select-time {
+                cursor: pointer;
+                margin: auto;
+                padding: 5px;
+                height: 35px;
+                width: 90%;
+                border: 1px solid rgb(207 207 207);
+                border-radius: 7px;
+            }
+
+            .select-time:hover {
+                background-color: #56e2f3;
+                color: white;
+            }
+
+            .select {
+                background-color: #207aff;
+                color: white;
+            }
+
+            .select:hover {
+                background-color: #207aff !important;
+                opacity: 0.9;
+            }
+        }
+    }
+
+    .btn-controll {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+}

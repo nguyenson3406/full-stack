@@ -1,0 +1,200 @@
+.List-background {
+    position: relative;
+    margin-top: 5px;
+    width: 100%;
+    min-height: 80%;
+    background: white;
+    font-family: 'Poppins', sans-serif;
+
+    .List-container {
+        position: absolute;
+        height: 90%;
+        background-color: white;
+        color: black;
+        margin: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        font-size: 16px;
+
+        .List-content {
+            margin-top: 10px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+
+            .title {
+                color: #0b5ed7;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .btn-add-new {
+                float: left;
+                font-weight: bold;
+                color: white;
+                display: block;
+            }
+
+            .search-content {
+                float: right;
+                margin-right: 3px;
+
+                i {
+                    display: flex !important;
+                    position: absolute;
+                    width: 20px;
+                    transform: translate(0px, 10px);
+                    margin-left: 0px;
+                    font-size: 17px;
+                }
+
+                input {
+                    height: 35px;
+                    background-color: white;
+                    border-radius: 5px 5px 5px 5px;
+                    padding: 0px 25px 0px 35px;
+                }
+
+                input:focus {
+                    border-color: rgb(230, 230, 230) !important;
+                    box-shadow: 1px 1px 1px rgb(230, 230, 230) !important;
+                }
+            }
+
+            table {
+                text-align: left;
+
+                th,
+                td {
+                    padding: 8px 15px;
+                }
+
+                th {
+                    color: white;
+                    background-color: #04AA6D;
+                    cursor: default;
+                }
+
+                td {
+                    border: 1px solid #ddd;
+                }
+
+                tfoot {
+                    background-color: white;
+                }
+
+                .show {
+                    text-align: center;
+                }
+
+                button {
+                    border: none;
+                    margin-right: 10px;
+                    cursor: pointer;
+                    background-color: transparent;
+                }
+
+                .page-controll {
+                    justify-content: flex-end;
+                    text-align: right;
+
+                    .row-number {
+                        width: 12%;
+                    }
+
+                    .chance-page {
+                        width: 13%;
+                    }
+
+                    .Row-dropdown {
+                        span {
+                            padding: 0px;
+                        }
+
+                        .box-row {
+                            padding: 0px;
+                            cursor: pointer;
+                            text-align: center;
+
+                            i {
+                                padding-left: 10px;
+                            }
+
+                            .content-dropdown {
+                                display: none;
+                                position: absolute;
+                                margin-top: 5px;
+                                padding: 5px 0px;
+                                border-radius: 5px;
+                                background-color: white;
+                                border: 1px solid rgb(230, 230, 230);
+                                transform: translate(5px, -5px);
+
+                                div {
+                                    text-align: center;
+                                    padding: 3px 20px;
+                                }
+
+                                div:hover {
+                                    background-color: rgb(224, 224, 224);
+                                }
+                            }
+                        }
+
+                        .box-row:hover {
+                            .content-dropdown {
+                                display: inherit;
+                            }
+                        }
+
+                    }
+
+                    button {
+                        margin: 0px !important;
+                    }
+
+                    button:hover {
+                        opacity: 0.5;
+                    }
+
+                    button:hover:disabled {
+                        opacity: 1;
+                        cursor: default;
+                    }
+                }
+
+                .sortList {
+                    cursor: pointer;
+                    padding-right: 20px;
+
+                    i {
+                        float: right;
+                    }
+
+                    .select {
+                        color: black;
+                        opacity: 0.7;
+                    }
+                }
+
+                .sortList:hover {
+                    color: #ddd;
+
+                    .select {
+                        opacity: 0.5;
+                    }
+                }
+
+                .btn-edit {
+                    color: orange;
+                }
+
+                .btn-delete {
+                    color: red;
+                }
+            }
+        }
+    }
+}
